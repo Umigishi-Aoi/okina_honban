@@ -1,0 +1,16 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'template_tpl.freezed.dart';
+
+part 'template_tpl.g.dart';
+
+@freezed
+class TemplateTpl with _$TemplateTpl {
+  const factory TemplateTpl({
+  }) = _TemplateTpl;
+
+  const TemplateTpl._();
+
+  factory TemplateTpl.fromJson(Map<String, dynamic> json) =>
+      _$TemplateTplFromJson(json);
+}

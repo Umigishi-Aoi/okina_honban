@@ -1,0 +1,8 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:okina_honban/ui/base/base.dart';
+
+final templateTplViewModelProvider = ChangeNotifierProvider.autoDispose((ref) => TemplateTplViewModel(ref));
+
+class TemplateTplViewModel extends BaseViewModel {
+  TemplateTplViewModel(super._ref);
+}

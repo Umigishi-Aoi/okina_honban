@@ -1,0 +1,9 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:okina_honban/data/repository/template_tpl_repository.dart';
+import 'package:okina_honban/data/model/model.dart';
+
+final templateTplRepositoryProvider = Provider((ref) => TemplateTplRepositoryImpl());
+
+class TemplateTplRepositoryImpl extends TemplateTplRepository {
+  TemplateTplRepositoryImpl();
+}
