@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_practice/router/router.dart';
+import 'package:okina_honban/router/router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'foundation/constants.dart';

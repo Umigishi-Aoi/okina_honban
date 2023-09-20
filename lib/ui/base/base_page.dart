@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_practice/ui/base/base_app_bar.dart';
-import 'package:okina_practice/ui/base/base_loading.dart';
+import 'package:okina_honban/ui/base/base_app_bar.dart';
+import 'package:okina_honban/ui/base/base_loading.dart';
 
 import 'base_view_model.dart';
 

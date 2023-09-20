@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_practice/ui/base/base.dart';
+import 'package:okina_honban/ui/base/base.dart';
 
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
