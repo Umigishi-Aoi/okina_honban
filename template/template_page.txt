@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:okina_honban/ui/base/base.dart';
+import 'package:okina_honban/data/model/model.dart';
 
 class TemplateTplPage extends HookConsumerWidget {
   const TemplateTplPage({super.key});
@@ -12,7 +13,9 @@ class TemplateTplPage extends HookConsumerWidget {
 
   Widget _buildBody() {
     return Column(
-      children: [],
+      children: [
+
+      ],
     );
   }
 }
