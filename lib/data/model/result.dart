@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:logger/logger.dart';
 
 part 'result.freezed.dart';
 
@@ -22,6 +23,7 @@ sealed class Result<T> with _$Result<T> {
     try {
       return Result.success(await future());
     } on Exception catch (e) {
+      Logger().e(e);
       return Result.failure(e);
     }
   }
