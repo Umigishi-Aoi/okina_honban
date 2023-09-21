@@ -10,12 +10,12 @@ final baseViewModelProvider = ChangeNotifierProvider<BaseViewModel>((ref) {
 final loadingStateProvider = StateProvider((ref) => false);
 
 class BaseViewModel extends ChangeNotifier {
-  BaseViewModel(this._ref);
+  BaseViewModel(this.ref);
 
-  final Ref _ref;
+  final Ref ref;
 
   StateController<bool> get loadingState =>
-      _ref.read(loadingStateProvider.notifier);
+      ref.read(loadingStateProvider.notifier);
 
   bool get isLoading => loadingState.state;
 

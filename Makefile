@@ -107,7 +107,7 @@ c-repo:
 	cp template/template_repository_impl.txt $(REPO_IMPL_PATH)
 
 	@# repository.dartに挿入
-	echo "export '$(SNAKE_CASE).dart';" >> lib/data/repository/repository.dart
+	echo "export $(REPOSITORY_PATH);" >> lib/data/repository/repository.dart
 
 	@# プレースホルダーを置換
 	sed -i '' 's/TemplateTpl/$(UPPER_CAMEL_CASE)/g' $(REPOSITORY_PATH) $(REPO_IMPL_PATH)
