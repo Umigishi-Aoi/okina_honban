@@ -8,13 +8,13 @@ import 'base_view_model.dart';
 class BasePage extends HookConsumerWidget {
   const BasePage(
       {Key? key,
-        required this.body,
-        this.appBar,
-        this.bottomNavigationBar,
-        this.backgroundColor = Colors.white,
-        this.floatingActionButton,
-        this.loading,
-        this.needShowLoading = true})
+      required this.body,
+      this.appBar,
+      this.bottomNavigationBar,
+      this.backgroundColor = Colors.white,
+      this.floatingActionButton,
+      this.loading,
+      this.needShowLoading = true})
       : super(key: key);
 
   final Widget body;
@@ -25,22 +25,17 @@ class BasePage extends HookConsumerWidget {
   final Widget? loading;
   final bool needShowLoading;
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = ref.watch(loadingStateProvider.notifier).state;
+    final isLoading = ref.watch(loadingStateProvider);
     return Scaffold(
       appBar: appBar ?? const BaseAppBar(),
       bottomNavigationBar: bottomNavigationBar,
       backgroundColor: backgroundColor,
       floatingActionButton: floatingActionButton,
       body: Stack(
-        children: [
-          body,
-          loading ?? BaseLoading(isLoading && needShowLoading)
-        ],
+        children: [body, loading ?? BaseLoading(isLoading && needShowLoading)],
       ),
     );
   }
-
 }
