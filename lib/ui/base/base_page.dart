@@ -28,7 +28,7 @@ class BasePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = ref.watch(loadingStateProvider.notifier).state;
+    final isLoading = ref.watch(loadingStateProvider);
     return Scaffold(
       appBar: appBar ?? const BaseAppBar(),
       bottomNavigationBar: bottomNavigationBar,
