@@ -29,6 +29,10 @@ TEMPLATE_VIEW_MODEL_PATH := template/template_view_model.txt
 TEMPLATE_REPOSITORY_PATH := template/template_repository.txt
 TEMPLATE_REPOSITORY_IMPL_PATH := template/template_repository_impl.txt
 
+## route template
+ROUTER_FILE=lib/router/router.dart
+NEW_ROUTE_CODE=template/template_route.txt
+
 define SET_CASES
 	$(eval SNAKE_CASE=$(nm))
 	$(eval CAMEL_CASE=$(shell echo $(SNAKE_CASE) | awk -F_ 'BEGIN{OFS="";} {for(i=1;i<=NF;i++) $$i=(i==1?tolower(substr($$i,1,1)):toupper(substr($$i,1,1))) tolower(substr($$i,2));}1'))
@@ -79,6 +83,12 @@ c-view:
 	@# model.dartに挿入
 	echo "const String $(CAMEL_CASE)Path = '/$(SNAKE_CASE)';" >> lib/router/router_path.dart
 
+	@# 新規追加ページへのrouteを挿入する
+	sed -i '' "/\/\/ INSERT ROUTE HERE/r $(NEW_ROUTE_CODE)" $(ROUTER_FILE)
+	sed -i '' 's/templateTpl/$(CAMEL_CASE)/g' $(ROUTER_FILE)
+	sed -i '' 's/TemplateTpl/$(UPPER_CAMEL_CASE)/g' $(ROUTER_FILE)
+	sed -i '' '1s/^/import '\''package:okina_honban\/ui\/$(SNAKE_CASE)\/$(SNAKE_CASE)_view.dart'\'';\n/' $(ROUTER_FILE)
+
 	@# プレースホルダーを置換
 	sed -i '' 's/TemplateTpl/$(UPPER_CAMEL_CASE)/g' $(VIEW_PATH) $(VIEW_MODEL_PATH)
 	sed -i '' 's/templateTpl/$(CAMEL_CASE)/g' $(VIEW_PATH) $(VIEW_MODEL_PATH)
@@ -112,3 +122,5 @@ c-repo:
 	sed -i '' 's/templateTpl/$(CAMEL_CASE)/g' $(REPOSITORY_PATH) $(REPO_IMPL_PATH)
 	sed -i '' 's/template_tpl/$(SNAKE_CASE)/g' $(REPOSITORY_PATH) $(REPO_IMPL_PATH)
 	sed -i '' 's/app_name/$(APP_NAME)/g' $(REPOSITORY_PATH) $(REPO_IMPL_PATH)
+
+all: c-model c-view c-repo
