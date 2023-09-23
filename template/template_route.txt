@@ -1,0 +1,5 @@
+
+    GoRoute(
+        path: templateTplPath,
+        pageBuilder: (context, state) => const MaterialPage(child: TemplateTplPage()),
+    ),
