@@ -8,6 +8,7 @@ final router = GoRouter(
   initialLocation: homePath,
   routes: [
     // INSERT ROUTE HERE
+
     GoRoute(
       path: homePath,
       pageBuilder: (context, state) => const MaterialPage(child: HomePage()),

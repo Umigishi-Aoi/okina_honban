@@ -69,7 +69,7 @@ c-view:
 	mkdir -p $(DIC_PATH)
 
 	@# ビューファイルパスを作成
-	$(eval VIEW_PATH=$(DIC_PATH)/$(SNAKE_CASE)_view.dart)
+	$(eval VIEW_PATH=$(DIC_PATH)/$(SNAKE_CASE)_page.dart)
 
 	@# ビューモデルファイルパスを作成
 	$(eval VIEW_MODEL_PATH=$(DIC_PATH)/$(SNAKE_CASE)_view_model.dart)
@@ -87,7 +87,7 @@ c-view:
 	sed -i '' "/\/\/ INSERT ROUTE HERE/r $(NEW_ROUTE_CODE)" $(ROUTER_FILE)
 	sed -i '' 's/templateTpl/$(CAMEL_CASE)/g' $(ROUTER_FILE)
 	sed -i '' 's/TemplateTpl/$(UPPER_CAMEL_CASE)/g' $(ROUTER_FILE)
-	sed -i '' '1s/^/import '\''package:okina_honban\/ui\/$(SNAKE_CASE)\/$(SNAKE_CASE)_view.dart'\'';\n/' $(ROUTER_FILE)
+	sed -i '' '1s/^/import '\''package:$(APP_NAME)\/ui\/$(SNAKE_CASE)\/$(SNAKE_CASE)_page.dart'\'';\n/' $(ROUTER_FILE)
 
 	@# プレースホルダーを置換
 	sed -i '' 's/TemplateTpl/$(UPPER_CAMEL_CASE)/g' $(VIEW_PATH) $(VIEW_MODEL_PATH)
