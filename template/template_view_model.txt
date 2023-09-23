@@ -5,6 +5,6 @@ import 'package:okina_honban/data/model/model.dart';
 final templateTplViewModelProvider = ChangeNotifierProvider.autoDispose((ref) => TemplateTplViewModel(ref));
 
 class TemplateTplViewModel extends BaseViewModel {
-  TemplateTplViewModel(super._ref);
+  TemplateTplViewModel(super.ref);
 
 }
