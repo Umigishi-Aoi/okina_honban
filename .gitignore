@@ -184,3 +184,6 @@ doc/api/
 
 # Exceptions to above rules.
 !*/.gitignore
+
+# asdf tool-versions
+.tool-versions
