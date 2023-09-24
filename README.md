@@ -84,4 +84,4 @@ okina_honban$ flutter pub get
 [Makefile](./Makefile)に定義しているコマンドを利用することでView関連のファイルやModel, Repository, ルーティングを自動生成することができます。  
 ユースケースに応じて指定のコマンドを叩いてください。  
 
-[自動生成コマンドの使い方はこちら](./docs/how-to-drive-this-project.md)
+[自動生成コマンドの使い方はこちら](./docs/how-to-use-command.md)
