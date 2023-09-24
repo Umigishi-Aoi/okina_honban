@@ -1,7 +1,7 @@
 # About okina_honban
 
-このプロジェクトはTokyo Flutter Hackason向けのプロジェクトです。
-当日に`git clone`して使用してください。
+このプロジェクトはTokyo Flutter Hackason向けのプロジェクトです。  
+`git clone`して使用してください。
 
 ## Getting Started
 
@@ -57,10 +57,11 @@ Githubから`okina_honban`のプロジェクトをクローンしてビルドで
 以下はSSHでクローンしてます。
 SSHでクローする前に事前準備が必要になるのでリンクを参考に各自で設定してください。
 
-参考: [GitHubでssh接続する手順~公開鍵・秘密鍵の生成から~](https://qiita.com/shizuma/items/2b2f873a0034839e47ce)
+参考: [GitHubでssh接続する手順 ~ 公開鍵・秘密鍵の生成から ~](https://qiita.com/shizuma/items/2b2f873a0034839e47ce)
 
 ※flutterコマンドが使える場所にクローンしてくる必要があります。  
-flutterコマンドが使えるかは、`which flutter`コマンドでパスの場所を確認する、`flutter --version`でバージョンが表示されるかなどで確認しましょう。
+flutterコマンドが使えるかは、`which flutter`コマンドでパスの場所を確認する、  
+`flutter --version`でバージョンが表示されるかなどで確認しましょう。
 
 ```
 // ローカルにクローン
@@ -69,7 +70,7 @@ git clone git@github.com:Umigishi-Aoi/okina_honban.git
 // プロジェクトルートに移動する
 cd okina_honban
 
-// パッケージの依存関係を解消するため`flutter pub get`する
+// 依存パッケージの取得をするため`flutter pub get`する
 okina_honban$ flutter pub get
 ```
 
