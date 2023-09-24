@@ -106,7 +106,7 @@ c-repo:
 	$(eval REPOSITORY_PATH=$(DIC_PATH)/$(SNAKE_CASE)_repository.dart)
 
 	@# リポインプルファイルパスを作成
-	$(eval REPO_IMPL_PATH=$(DIC_PATH)/$(SNAKE_CASE)_rempository_impl.dart)
+	$(eval REPO_IMPL_PATH=$(DIC_PATH)/$(SNAKE_CASE)_repository_impl.dart)
 
 	@# テンプレートからリポジトリファイルを作成
 	cp $(TEMPLATE_REPOSITORY_PATH) $(REPOSITORY_PATH)
