@@ -9,6 +9,8 @@ final baseViewModelProvider = ChangeNotifierProvider<BaseViewModel>((ref) {
 
 final loadingStateProvider = StateProvider((ref) => false);
 
+final errorStateProvider = StateProvider<Failure<Object?>?>((ref) => null);
+
 class BaseViewModel extends ChangeNotifier {
   BaseViewModel(this.ref);
 
@@ -29,10 +31,15 @@ class BaseViewModel extends ChangeNotifier {
     loadingState.state = false;
   }
 
-  Future<Result<T>> callFuture<T>(Future<T> Function() future,
-      {bool isLoading = true}) {
-    return Future.microtask(toLoading)
+  Future<void> callFuture<T>(Future<T> Function() future,
+      {bool isLoading = true}) async {
+    final result = await Future.microtask(toLoading)
         .then((_) => Result.guardFuture(future))
         .whenComplete(toIdle);
+
+    if (result is Failure<T>) {
+      ref.read(errorStateProvider.notifier).state = result;
+      notifyListeners();
+    }
   }
 }
