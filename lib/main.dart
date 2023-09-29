@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:okina_honban/data/repository/repository.dart';
+import 'package:okina_honban/data/repository/supabase_repository_impl.dart';
 import 'package:okina_honban/router/router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -12,16 +14,25 @@ void main() async {
     url: supabaseUrl,
     anonKey: supabaseAnonKey,
   );
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(
+    ProviderScope(
+      overrides: [
+        supabaseRepositoryProvider.overrideWithValue(
+          SupabaseRepositoryImpl(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
-      routerConfig: router,
+      routerConfig: ref.read(routerProvider),
     );
   }
 }

@@ -7,9 +7,13 @@ w:
 clean:
 ## Flutter cache
 	rm ios/Podfile.lock | true
+	rm macos/Podfile.lock | true
 ## ios Pod Lock file
 	rm -rf ios/Pods | true
 	rm ios/Flutter/Flutter.podspec | true
+## macos Pod Lock file
+	rm -rf macos/Pods | true
+	rm macos/Flutter/Flutter.podspec | true	
 ## pod cache
 	rm -rf ~/Library/Developer/Xcode/DerivedData/ | true
 ## Xcode cache
