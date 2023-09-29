@@ -32,8 +32,7 @@ sealed class Result<T> with _$Result<T> {
   bool get isFailure =>
       when(success: (data) => false, failure: (error) => true);
 
-  T? get data =>
-      when(success: (data) => data, failure: (error) => null);
+  T? get data => when(success: (data) => data, failure: (error) => null);
 
   Exception? get exception =>
       when(success: (data) => null, failure: (error) => error);

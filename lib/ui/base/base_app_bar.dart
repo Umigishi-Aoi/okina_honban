@@ -42,9 +42,9 @@ class BaseAppBar extends HookConsumerWidget implements PreferredSizeWidget {
   Widget _buildLeading(BuildContext context) {
     return showBackButton
         ? Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            GestureDetector(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              GestureDetector(
                 onTap: backButtonCallBack ??
                     () {
                       Navigator.of(context).pop();
@@ -54,9 +54,9 @@ class BaseAppBar extends HookConsumerWidget implements PreferredSizeWidget {
                   child: Icon(Icons.arrow_back_ios),
                 ),
               ),
-            leading ?? const SizedBox(),
-          ],
-        )
+              leading ?? const SizedBox(),
+            ],
+          )
         : const SizedBox();
   }
 
