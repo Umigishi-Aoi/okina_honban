@@ -28,7 +28,17 @@ class SignUpPage extends HookConsumerWidget {
               child: TextFormField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Email'),
+                  label: Text('ユーザー名'),
+                ),
+                controller: userNameController,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('メールアドレス'),
                 ),
                 controller: emailController,
               ),
@@ -38,19 +48,9 @@ class SignUpPage extends HookConsumerWidget {
               child: TextFormField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Password'),
+                  label: Text('パスワード'),
                 ),
                 controller: passwordController,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('User Name'),
-                ),
-                controller: userNameController,
               ),
             ),
             Padding(
@@ -67,14 +67,14 @@ class SignUpPage extends HookConsumerWidget {
                   }
                   context.go(homePath);
                 },
-                child: const Text('Sign Up'),
+                child: const Text('アカウント作成'),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
                 onPressed: () => context.go(signInPath),
-                child: const Text('sign in'),
+                child: const Text('サインイン'),
               ),
             ),
           ],
