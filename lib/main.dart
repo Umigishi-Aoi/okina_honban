@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_honban/ui/complete_game/game_over_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'data/repository/repository.dart';
@@ -22,8 +21,7 @@ void main() async {
           SupabaseRepositoryImpl(),
         ),
       ],
-      // child: const MyApp(),
-      child: const MaterialApp(home: GameOverPage()),
+      child: const MyApp(),
     ),
   );
 }
