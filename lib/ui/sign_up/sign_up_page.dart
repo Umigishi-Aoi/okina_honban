@@ -23,35 +23,59 @@ class SignUpPage extends HookConsumerWidget {
       builder: (context, ref, __) {
         return Column(
           children: [
-            TextField(
-              decoration: const InputDecoration(label: Text('Email')),
-              controller: emailController,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 100, 8, 8),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('ユーザー名'),
+                ),
+                controller: userNameController,
+              ),
             ),
-            TextField(
-              decoration: const InputDecoration(label: Text('Password')),
-              controller: passwordController,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('メールアドレス'),
+                ),
+                controller: emailController,
+              ),
             ),
-            TextField(
-              decoration: const InputDecoration(label: Text('User Name')),
-              controller: userNameController,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('パスワード'),
+                ),
+                controller: passwordController,
+              ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await ref.read(signUpViewModelProvider.notifier).signUp(
-                      email: emailController.text,
-                      password: passwordController.text,
-                      userName: userNameController.text,
-                    );
-                if (!context.mounted) {
-                  return;
-                }
-                context.go(homePath);
-              },
-              child: const Text('Sign Up'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () async {
+                  await ref.read(signUpViewModelProvider.notifier).signUp(
+                        email: emailController.text,
+                        password: passwordController.text,
+                        userName: userNameController.text,
+                      );
+                  if (!context.mounted) {
+                    return;
+                  }
+                  context.go(homePath);
+                },
+                child: const Text('アカウント作成'),
+              ),
             ),
-            TextButton(
-              onPressed: () => context.go(signInPath),
-              child: const Text('sign in'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextButton(
+                onPressed: () => context.go(signInPath),
+                child: const Text('サインイン'),
+              ),
             ),
           ],
         );

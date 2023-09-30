@@ -53,6 +53,7 @@ class BasePage extends HookConsumerWidget {
               ),
         ],
       ),
+      resizeToAvoidBottomInset: false,
     );
   }
 }
