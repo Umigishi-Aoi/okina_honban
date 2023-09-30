@@ -5,6 +5,8 @@ import 'package:okina_honban/router/router_path.dart';
 import 'package:okina_honban/ui/base/base.dart';
 import 'package:okina_honban/ui/home/home_view_model.dart';
 
+import '../../router/router_path.dart';
+
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
 
@@ -27,7 +29,7 @@ class HomePage extends HookConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _buildText(),
-        _buildStartButton(),
+        _buildGoToGamePageButton(),
         _buildRankingButton(context),
       ],
     );
@@ -37,13 +39,6 @@ class HomePage extends HookConsumerWidget {
     return const Center(child: Text('TOEIC 対策'));
   }
 
-  Widget _buildStartButton() {
-    return ElevatedButton(
-      onPressed: () {},
-      child: const Text('スタート'),
-    );
-  }
-
   Widget _buildRankingButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
@@ -51,5 +46,14 @@ class HomePage extends HookConsumerWidget {
       },
       child: const Text('ランキング'),
     );
+  }
+
+  Widget _buildGoToGamePageButton() {
+    return Builder(builder: (context) {
+      return ElevatedButton(
+        onPressed: () => context.go(gamePath),
+        child: const Text('テトリス'),
+      );
+    });
   }
 }

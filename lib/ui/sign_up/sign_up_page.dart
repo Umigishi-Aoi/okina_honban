@@ -35,12 +35,16 @@ class SignUpPage extends HookConsumerWidget {
               controller: userNameController,
             ),
             ElevatedButton(
-              onPressed: () async => await ref
-                  .read(signUpViewModelProvider.notifier)
-                  .signUp(
-                      email: emailController.text,
-                      password: passwordController.text,
-                      userName: userNameController.text),
+              onPressed: () async {
+                await ref.read(signUpViewModelProvider.notifier).signUp(
+                    email: emailController.text,
+                    password: passwordController.text,
+                    userName: userNameController.text);
+                if (!context.mounted) {
+                  return;
+                }
+                context.go(homePath);
+              },
               child: const Text('Sign Up'),
             ),
             TextButton(
