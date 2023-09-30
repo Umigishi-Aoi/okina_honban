@@ -27,7 +27,7 @@ class SignInPage extends HookConsumerWidget {
               child: TextFormField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Email'),
+                  label: Text('メールアドレス'),
                 ),
                 controller: emailController,
               ),
@@ -37,7 +37,7 @@ class SignInPage extends HookConsumerWidget {
               child: TextFormField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  label: Text('Password'),
+                  label: Text('パスワード'),
                 ),
                 controller: passwordController,
               ),
