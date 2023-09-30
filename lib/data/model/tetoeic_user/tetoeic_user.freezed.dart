@@ -21,7 +21,6 @@ TetoeicUser _$TetoeicUserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TetoeicUser {
   String get name => throw _privateConstructorUsedError;
-  String get id => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
 
@@ -37,7 +36,7 @@ abstract class $TetoeicUserCopyWith<$Res> {
           TetoeicUser value, $Res Function(TetoeicUser) then) =
       _$TetoeicUserCopyWithImpl<$Res, TetoeicUser>;
   @useResult
-  $Res call({String name, String id, DateTime? updatedAt, int score});
+  $Res call({String name, DateTime? updatedAt, int score});
 }
 
 /// @nodoc
@@ -54,7 +53,6 @@ class _$TetoeicUserCopyWithImpl<$Res, $Val extends TetoeicUser>
   @override
   $Res call({
     Object? name = null,
-    Object? id = null,
     Object? updatedAt = freezed,
     Object? score = null,
   }) {
@@ -62,10 +60,6 @@ class _$TetoeicUserCopyWithImpl<$Res, $Val extends TetoeicUser>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
               as String,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
@@ -87,7 +81,7 @@ abstract class _$$TetoeicUserImplCopyWith<$Res>
       __$$TetoeicUserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String id, DateTime? updatedAt, int score});
+  $Res call({String name, DateTime? updatedAt, int score});
 }
 
 /// @nodoc
@@ -102,7 +96,6 @@ class __$$TetoeicUserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? id = null,
     Object? updatedAt = freezed,
     Object? score = null,
   }) {
@@ -110,10 +103,6 @@ class __$$TetoeicUserImplCopyWithImpl<$Res>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
               as String,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
@@ -130,8 +119,7 @@ class __$$TetoeicUserImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TetoeicUserImpl extends _TetoeicUser {
-  const _$TetoeicUserImpl(
-      {this.name = '', this.id = '', this.updatedAt, this.score = 0})
+  const _$TetoeicUserImpl({this.name = '', this.updatedAt, this.score = 0})
       : super._();
 
   factory _$TetoeicUserImpl.fromJson(Map<String, dynamic> json) =>
@@ -141,9 +129,6 @@ class _$TetoeicUserImpl extends _TetoeicUser {
   @JsonKey()
   final String name;
   @override
-  @JsonKey()
-  final String id;
-  @override
   final DateTime? updatedAt;
   @override
   @JsonKey()
@@ -151,7 +136,7 @@ class _$TetoeicUserImpl extends _TetoeicUser {
 
   @override
   String toString() {
-    return 'TetoeicUser(name: $name, id: $id, updatedAt: $updatedAt, score: $score)';
+    return 'TetoeicUser(name: $name, updatedAt: $updatedAt, score: $score)';
   }
 
   @override
@@ -160,7 +145,6 @@ class _$TetoeicUserImpl extends _TetoeicUser {
         (other.runtimeType == runtimeType &&
             other is _$TetoeicUserImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.score, score) || other.score == score));
@@ -168,7 +152,7 @@ class _$TetoeicUserImpl extends _TetoeicUser {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, id, updatedAt, score);
+  int get hashCode => Object.hash(runtimeType, name, updatedAt, score);
 
   @JsonKey(ignore: true)
   @override
@@ -187,7 +171,6 @@ class _$TetoeicUserImpl extends _TetoeicUser {
 abstract class _TetoeicUser extends TetoeicUser {
   const factory _TetoeicUser(
       {final String name,
-      final String id,
       final DateTime? updatedAt,
       final int score}) = _$TetoeicUserImpl;
   const _TetoeicUser._() : super._();
@@ -197,8 +180,6 @@ abstract class _TetoeicUser extends TetoeicUser {
 
   @override
   String get name;
-  @override
-  String get id;
   @override
   DateTime? get updatedAt;
   @override
