@@ -31,11 +31,16 @@ class SignInPage extends HookConsumerWidget {
               controller: passwordController,
             ),
             ElevatedButton(
-              onPressed: () async =>
-                  await ref.read(signInViewModelProvider.notifier).signIn(
-                        email: emailController.text,
-                        password: passwordController.text,
-                      ),
+              onPressed: () async {
+                await ref.read(signInViewModelProvider.notifier).signIn(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    );
+                if (!context.mounted) {
+                  return;
+                }
+                context.go(homePath);
+              },
               child: const Text('Sign In'),
             ),
             TextButton(
