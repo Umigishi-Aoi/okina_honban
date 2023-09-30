@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_honban/ui/base/base.dart';
-import 'package:okina_honban/ui/sign_in/sign_in_view_model.dart';
 
 import '../../router/router_path.dart';
+import '../base/base.dart';
+import 'sign_in_view_model.dart';
 
 class SignInPage extends HookConsumerWidget {
   const SignInPage({super.key});
@@ -22,25 +22,46 @@ class SignInPage extends HookConsumerWidget {
       builder: (context, ref, __) {
         return Column(
           children: [
-            TextField(
-              decoration: const InputDecoration(label: Text('Email')),
-              controller: emailController,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 100, 8, 8),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('メールアドレス'),
+                ),
+                controller: emailController,
+              ),
             ),
-            TextField(
-              decoration: const InputDecoration(label: Text('Password')),
-              controller: passwordController,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('パスワード'),
+                ),
+                controller: passwordController,
+              ),
             ),
-            ElevatedButton(
-              onPressed: () async =>
+            TextButton(onPressed: () {}, child: const Text('パスワードをお忘れですか？')),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () async {
                   await ref.read(signInViewModelProvider.notifier).signIn(
                         email: emailController.text,
                         password: passwordController.text,
-                      ),
-              child: const Text('Sign In'),
+                      );
+                  if (!context.mounted) {
+                    return;
+                  }
+                  context.go(homePath);
+                },
+                child: const Text('サインイン'),
+              ),
             ),
             TextButton(
               onPressed: () => context.go(signUpPath),
-              child: const Text('Sign Up'),
+              child: const Text('アカウント作成'),
             ),
           ],
         );

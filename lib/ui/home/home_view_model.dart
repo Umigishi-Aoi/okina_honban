@@ -1,10 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_honban/ui/base/base.dart';
 
 import '../../data/repository/repository.dart';
+import '../base/base.dart';
 
 final homeViewModelProvider =
-    ChangeNotifierProvider.autoDispose((ref) => HomeViewModel(ref));
+    ChangeNotifierProvider.autoDispose(HomeViewModel.new);
 
 class HomeViewModel extends BaseViewModel {
   HomeViewModel(super.ref)
@@ -13,7 +13,7 @@ class HomeViewModel extends BaseViewModel {
 
   final SupabaseRepository _supabaseRepository;
 
-  Future<void> signOut() async => await callFuture<void>(
-        () async => await _supabaseRepository.signOut(),
+  Future<void> signOut() async => callFuture<void>(
+        () async => _supabaseRepository.signOut(),
       );
 }

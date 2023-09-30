@@ -1,11 +1,12 @@
 import 'package:okina_honban/ui/complete_game/complete_game_page.dart';
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as r;
 import 'package:okina_honban/router/router_path.dart';
+import 'package:okina_honban/ui/ranking/ranking_page.dart';
+import 'package:okina_honban/ui/game/game_page.dart';
 import 'package:okina_honban/ui/sign_in/sign_in_page.dart';
 import 'package:okina_honban/ui/sign_up/sign_up_page.dart';
 
@@ -15,9 +16,9 @@ import '../ui/home/home_page.dart';
 final routerProvider = r.Provider((ref) {
   final authState = ref.watch(supabaseRepositoryProvider).authState;
   return GoRouter(
-    initialLocation: homePath,
+    initialLocation: null,
     redirect: (_, state) async {
-      String? path = homePath;
+      String? path;
       bool isSignIn = ref.read(supabaseRepositoryProvider).currentUser != null;
       String currentPath = state.matchedLocation;
 
@@ -27,8 +28,8 @@ final routerProvider = r.Provider((ref) {
         } else {
           path = signInPath;
         }
+        return path;
       }
-      log('path=$path');
       return path;
     },
     refreshListenable: GoRouterRefreshStream(authState),
@@ -39,6 +40,10 @@ final routerProvider = r.Provider((ref) {
         path: completeGamePath,
         pageBuilder: (context, state) => const MaterialPage(child: CompleteGamePage()),
     ),
+      GoRoute(
+        path: gamePath,
+        pageBuilder: (context, state) => const MaterialPage(child: GamePage()),
+      ),
       GoRoute(
         path: signUpPath,
         pageBuilder: (context, state) =>
@@ -53,6 +58,11 @@ final routerProvider = r.Provider((ref) {
         path: homePath,
         pageBuilder: (context, state) => const MaterialPage(child: HomePage()),
       ),
+      GoRoute(
+        path: rankingPath,
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: RankingPage()),
+      )
     ],
   );
 });
@@ -63,7 +73,6 @@ class GoRouterRefreshStream extends ChangeNotifier {
     notifyListeners();
     _subscription = stream.asBroadcastStream().listen(
       (dynamic _) {
-        log('notifyListeners');
         notifyListeners();
       },
     );
