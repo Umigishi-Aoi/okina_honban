@@ -1,10 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_honban/ui/base/base.dart';
 
 import '../../data/repository/repository.dart';
+import '../base/base.dart';
 
 final signUpViewModelProvider =
-    ChangeNotifierProvider.autoDispose((ref) => SignUpViewModel(ref));
+    ChangeNotifierProvider.autoDispose(SignUpViewModel.new);
 
 class SignUpViewModel extends BaseViewModel {
   SignUpViewModel(super.ref)
@@ -13,12 +13,13 @@ class SignUpViewModel extends BaseViewModel {
 
   final SupabaseRepository _supabaseRepository;
 
-  Future<void> signUp(
-          {required String email,
-          required String password,
-          required String userName}) async =>
-      await callFuture<void>(
-        () async => await _supabaseRepository.signUp(
+  Future<void> signUp({
+    required String email,
+    required String password,
+    required String userName,
+  }) async =>
+      callFuture<void>(
+        () async => _supabaseRepository.signUp(
           password: password,
           email: email,
           userName: userName,
