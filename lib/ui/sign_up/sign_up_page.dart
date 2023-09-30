@@ -17,6 +17,7 @@ class SignUpPage extends HookConsumerWidget {
   Widget _buildBody() {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
+    final userNameController = useTextEditingController();
     return HookConsumer(
       builder: (context, ref, __) {
         return Column(
@@ -29,12 +30,17 @@ class SignUpPage extends HookConsumerWidget {
               decoration: const InputDecoration(label: Text('Password')),
               controller: passwordController,
             ),
+            TextField(
+              decoration: const InputDecoration(label: Text('User Name')),
+              controller: userNameController,
+            ),
             ElevatedButton(
-              onPressed: () async =>
-                  await ref.read(signUpViewModelProvider.notifier).signUp(
-                        email: emailController.text,
-                        password: passwordController.text,
-                      ),
+              onPressed: () async => await ref
+                  .read(signUpViewModelProvider.notifier)
+                  .signUp(
+                      email: emailController.text,
+                      password: passwordController.text,
+                      userName: userNameController.text),
               child: const Text('Sign Up'),
             ),
             TextButton(

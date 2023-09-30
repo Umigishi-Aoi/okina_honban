@@ -34,10 +34,12 @@ class SupabaseRepositoryImpl extends SupabaseRepository {
   Future<void> signUp({
     required String password,
     required String email,
+    required String userName,
   }) async {
     await _supabaseClient.auth.signUp(
       password: password,
       email: email,
+      data: {'username': userName},
     );
   }
 }
