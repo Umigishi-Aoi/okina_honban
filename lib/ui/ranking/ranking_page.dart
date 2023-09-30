@@ -75,25 +75,81 @@ class RankingPage extends HookConsumerWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           child: ListView.builder(
-            itemCount: 50,
+            itemCount: users.length,
             itemBuilder: (context, index) {
               final user = users[index];
-              return Card(
-                child: ListTile(
-                  leading: Text(
-                    '${index + 1}.',
-                    style: GoogleFonts.dotGothic16(),
+              if (index == 0) {
+                return Card(
+                  color: const Color.fromARGB(255, 228, 216, 87),
+                  child: ListTile(
+                    leading: Text(
+                      '${index + 1}.',
+                      style: GoogleFonts.dotGothic16(),
+                    ),
+                    title: Text(
+                      user.name,
+                      style: GoogleFonts.dotGothic16(),
+                    ),
+                    trailing: Text(
+                      '${user.score}',
+                      style: GoogleFonts.dotGothic16(),
+                    ),
                   ),
-                  title: Text(
-                    user.name,
-                    style: GoogleFonts.dotGothic16(),
+                );
+              } else if (index == 1) {
+                return Card(
+                  color: const Color.fromARGB(255, 210, 206, 206),
+                  child: ListTile(
+                    leading: Text(
+                      '${index + 1}.',
+                      style: GoogleFonts.dotGothic16(),
+                    ),
+                    title: Text(
+                      user.name,
+                      style: GoogleFonts.dotGothic16(),
+                    ),
+                    trailing: Text(
+                      '${user.score}',
+                      style: GoogleFonts.dotGothic16(),
+                    ),
                   ),
-                  trailing: Text(
-                    '${user.score}',
-                    style: GoogleFonts.dotGothic16(),
+                );
+              } else if (index == 2) {
+                return Card(
+                  color: const Color.fromARGB(255, 195, 100, 66),
+                  child: ListTile(
+                    leading: Text(
+                      '${index + 1}.',
+                      style: GoogleFonts.dotGothic16(),
+                    ),
+                    title: Text(
+                      user.name,
+                      style: GoogleFonts.dotGothic16(),
+                    ),
+                    trailing: Text(
+                      '${user.score}',
+                      style: GoogleFonts.dotGothic16(),
+                    ),
                   ),
-                ),
-              );
+                );
+              } else {
+                return Card(
+                  child: ListTile(
+                    leading: Text(
+                      '${index + 1}.',
+                      style: GoogleFonts.dotGothic16(),
+                    ),
+                    title: Text(
+                      user.name,
+                      style: GoogleFonts.dotGothic16(),
+                    ),
+                    trailing: Text(
+                      '${user.score}',
+                      style: GoogleFonts.dotGothic16(),
+                    ),
+                  ),
+                );
+              }
             },
           ),
         );
