@@ -36,8 +36,12 @@ class GameViewModel extends BaseViewModel {
 
     final mat = _placedBlockMat;
 
-    for (int i = 0; i < _currentMino!.getMinoSize(); i++) {
-      for (int j = 0; j < _currentMino!.getMinoSize(); j++) {
+    for (int i = 0;
+        i < _currentMino!.getMinoSizeX(_currentMinoDirection!);
+        i++) {
+      for (int j = 0;
+          j < _currentMino!.getMinoSizeY(_currentMinoDirection!);
+          j++) {
         final x = i + _currentPosition!.x;
         final y = j + _currentPosition!.y;
         if (_currentPlacement![i][j] == 1) {
@@ -102,8 +106,12 @@ class GameViewModel extends BaseViewModel {
   }
 
   void updateMat(List<List<Block>> mat) {
-    for (int i = 0; i < _currentMino!.getMinoSize(); i++) {
-      for (int j = 0; j < _currentMino!.getMinoSize(); j++) {
+    for (int i = 0;
+        i < _currentMino!.getMinoSizeX(_currentMinoDirection!);
+        i++) {
+      for (int j = 0;
+          j < _currentMino!.getMinoSizeY(_currentMinoDirection!);
+          j++) {
         final x = i + _currentPosition!.x;
         final y = j + _currentPosition!.y;
         if (_currentPlacement![i][j] == 1) {
@@ -117,8 +125,12 @@ class GameViewModel extends BaseViewModel {
   List<List<Block>> resetMap() {
     List<List<Block>> mat = _placedBlockMat;
 
-    for (int i = 0; i < _currentMino!.getMinoSize(); i++) {
-      for (int j = 0; j < _currentMino!.getMinoSize(); j++) {
+    for (int i = 0;
+        i < _currentMino!.getMinoSizeX(_currentMinoDirection!);
+        i++) {
+      for (int j = 0;
+          j < _currentMino!.getMinoSizeY(_currentMinoDirection!);
+          j++) {
         final x = i + _currentPosition!.x;
         final y = j + _currentPosition!.y;
         if (_currentPlacement![i][j] == 1) {
@@ -145,7 +157,9 @@ class GameViewModel extends BaseViewModel {
   }
 
   void goRight() {
-    if (_currentPosition!.y + (_currentMino!.getMinoSize() - 1) + 1 >
+    if (_currentPosition!.y +
+            (_currentMino!.getMinoSizeY(_currentMinoDirection!) - 1) +
+            1 >
         kWNum - 1) {
       return;
     }
@@ -160,7 +174,9 @@ class GameViewModel extends BaseViewModel {
   }
 
   void goDown() {
-    if (_currentPosition!.x + (_currentMino!.getMinoSize() - 1) + 1 >
+    if (_currentPosition!.x +
+            (_currentMino!.getMinoSizeX(_currentMinoDirection!) - 1) +
+            1 >
         kHNum - 1) {
       return;
     }
