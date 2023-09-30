@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 't_box.dart';
+part of 'block.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,18 +15,18 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$TBox {
+mixin _$Block {
   Color? get color => throw _privateConstructorUsedError;
   Position get position => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TBoxCopyWith<TBox> get copyWith => throw _privateConstructorUsedError;
+  $BlockCopyWith<Block> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TBoxCopyWith<$Res> {
-  factory $TBoxCopyWith(TBox value, $Res Function(TBox) then) =
-      _$TBoxCopyWithImpl<$Res, TBox>;
+abstract class $BlockCopyWith<$Res> {
+  factory $BlockCopyWith(Block value, $Res Function(Block) then) =
+      _$BlockCopyWithImpl<$Res, Block>;
   @useResult
   $Res call({Color? color, Position position});
 
@@ -34,9 +34,9 @@ abstract class $TBoxCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TBoxCopyWithImpl<$Res, $Val extends TBox>
-    implements $TBoxCopyWith<$Res> {
-  _$TBoxCopyWithImpl(this._value, this._then);
+class _$BlockCopyWithImpl<$Res, $Val extends Block>
+    implements $BlockCopyWith<$Res> {
+  _$BlockCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -71,10 +71,10 @@ class _$TBoxCopyWithImpl<$Res, $Val extends TBox>
 }
 
 /// @nodoc
-abstract class _$$TBoxImplCopyWith<$Res> implements $TBoxCopyWith<$Res> {
-  factory _$$TBoxImplCopyWith(
-          _$TBoxImpl value, $Res Function(_$TBoxImpl) then) =
-      __$$TBoxImplCopyWithImpl<$Res>;
+abstract class _$$BlockImplCopyWith<$Res> implements $BlockCopyWith<$Res> {
+  factory _$$BlockImplCopyWith(
+          _$BlockImpl value, $Res Function(_$BlockImpl) then) =
+      __$$BlockImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Color? color, Position position});
@@ -84,10 +84,11 @@ abstract class _$$TBoxImplCopyWith<$Res> implements $TBoxCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TBoxImplCopyWithImpl<$Res>
-    extends _$TBoxCopyWithImpl<$Res, _$TBoxImpl>
-    implements _$$TBoxImplCopyWith<$Res> {
-  __$$TBoxImplCopyWithImpl(_$TBoxImpl _value, $Res Function(_$TBoxImpl) _then)
+class __$$BlockImplCopyWithImpl<$Res>
+    extends _$BlockCopyWithImpl<$Res, _$BlockImpl>
+    implements _$$BlockImplCopyWith<$Res> {
+  __$$BlockImplCopyWithImpl(
+      _$BlockImpl _value, $Res Function(_$BlockImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -96,7 +97,7 @@ class __$$TBoxImplCopyWithImpl<$Res>
     Object? color = freezed,
     Object? position = null,
   }) {
-    return _then(_$TBoxImpl(
+    return _then(_$BlockImpl(
       color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
@@ -111,8 +112,8 @@ class __$$TBoxImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TBoxImpl extends _TBox {
-  const _$TBoxImpl({this.color, required this.position}) : super._();
+class _$BlockImpl extends _Block {
+  const _$BlockImpl({this.color, required this.position}) : super._();
 
   @override
   final Color? color;
@@ -121,14 +122,14 @@ class _$TBoxImpl extends _TBox {
 
   @override
   String toString() {
-    return 'TBox(color: $color, position: $position)';
+    return 'Block(color: $color, position: $position)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TBoxImpl &&
+            other is _$BlockImpl &&
             (identical(other.color, color) || other.color == color) &&
             (identical(other.position, position) ||
                 other.position == position));
@@ -140,14 +141,14 @@ class _$TBoxImpl extends _TBox {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TBoxImplCopyWith<_$TBoxImpl> get copyWith =>
-      __$$TBoxImplCopyWithImpl<_$TBoxImpl>(this, _$identity);
+  _$$BlockImplCopyWith<_$BlockImpl> get copyWith =>
+      __$$BlockImplCopyWithImpl<_$BlockImpl>(this, _$identity);
 }
 
-abstract class _TBox extends TBox {
-  const factory _TBox({final Color? color, required final Position position}) =
-      _$TBoxImpl;
-  const _TBox._() : super._();
+abstract class _Block extends Block {
+  const factory _Block({final Color? color, required final Position position}) =
+      _$BlockImpl;
+  const _Block._() : super._();
 
   @override
   Color? get color;
@@ -155,6 +156,6 @@ abstract class _TBox extends TBox {
   Position get position;
   @override
   @JsonKey(ignore: true)
-  _$$TBoxImplCopyWith<_$TBoxImpl> get copyWith =>
+  _$$BlockImplCopyWith<_$BlockImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

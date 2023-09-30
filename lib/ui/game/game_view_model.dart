@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:okina_honban/ui/base/base.dart';
 import 'package:okina_honban/ui/game/game_const.dart';
-import 'package:okina_honban/ui/game/model/t_box.dart';
+import 'package:okina_honban/ui/game/model/block.dart';
 
 import 'model/position.dart';
 
@@ -11,9 +11,10 @@ final gameViewModelProvider =
 class GameViewModel extends BaseViewModel {
   GameViewModel(super.ref);
 
-  List<List<TBox>> _tBoxes = List.generate(hNum,
-      (i) => List.generate(wNum, (j) => TBox(position: Position(x: j, y: i))));
-  List<List<TBox>> get tBoxes => _tBoxes;
+  List<List<Block>> _tBoxes = List.generate(hNum,
+      (i) => List.generate(wNum, (j) => Block(position: Position(x: j, y: i))));
+  List<List<Block>> get tBoxes => _tBoxes;
 
-  List<TBox> get tBoxesFlatten => _tBoxes.expand((element) => element).toList();
+  List<Block> get tBoxesFlatten =>
+      _tBoxes.expand((element) => element).toList();
 }
