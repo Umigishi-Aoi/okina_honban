@@ -42,9 +42,9 @@ class HomePage extends HookConsumerWidget {
   Widget _buildText() {
     return Center(
       child: Text(
-        'TOEIC 対策',
+        'TETOEIC',
         style: GoogleFonts.dotGothic16(
-          textStyle: const TextStyle(fontSize: 50),
+          textStyle: const TextStyle(fontSize: 60, fontWeight: FontWeight.w700),
         ),
       )
           .animate(onPlay: (controller) => controller.repeat())
