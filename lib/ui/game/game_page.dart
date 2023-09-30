@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_honban/ui/base/base.dart';
 import 'package:okina_honban/ui/game/component/t_box_widget.dart';
 import 'package:okina_honban/ui/game/game_const.dart';
 
@@ -11,7 +10,7 @@ class GamePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return BasePage(body: _buildBody());
+    return Scaffold(body: _buildBody());
   }
 
   Widget _buildBody() {
@@ -25,12 +24,15 @@ class GamePage extends HookConsumerWidget {
   Widget _buildMainBox() {
     return HookConsumer(builder: (context, ref, child) {
       final wPadding = MediaQuery.of(context).size.width * 0.1;
+      final height = MediaQuery.of(context).size.height * 0.8;
       return Container(
+          height: height,
           padding: EdgeInsets.symmetric(horizontal: wPadding),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.white, width: 4),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               _buildTBoxes(),
             ],
@@ -42,9 +44,17 @@ class GamePage extends HookConsumerWidget {
     return HookConsumer(builder: (context, ref, child) {
       final tBoxesFlatten = ref
           .watch(gameViewModelProvider.select((value) => value.tBoxesFlatten));
-      return GridView.count(
-          crossAxisCount: wNum,
-          children: tBoxesFlatten.map((tBox) => TBoxWidget(tBox)).toList());
+      final length = MediaQuery.of(context).size.height * 0.8 / hNum;
+      return Expanded(
+        child: GridView.count(
+            crossAxisCount: wNum,
+            children: tBoxesFlatten
+                .map((tBox) => TBoxWidget(
+                      tBox: tBox,
+                      length: length,
+                    ))
+                .toList()),
+      );
     });
   }
 }
