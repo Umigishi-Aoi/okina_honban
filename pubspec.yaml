@@ -42,5 +42,6 @@ dependency_overrides:
 flutter:
   assets:
     - assets/images/quiz/
+    - assets/sounds/
 
   uses-material-design: true

@@ -15,6 +15,23 @@ class $AssetsImagesGen {
   $AssetsImagesQuizGen get quiz => const $AssetsImagesQuizGen();
 }
 
+class $AssetsSoundsGen {
+  const $AssetsSoundsGen();
+
+  /// File path: assets/sounds/add-complex-rhythm.mp3
+  String get addComplexRhythm => 'assets/sounds/add-complex-rhythm.mp3';
+
+  /// File path: assets/sounds/compose-a-fast.mp3
+  String get composeAFast => 'assets/sounds/compose-a-fast.mp3';
+
+  /// File path: assets/sounds/generate-a-rhythmic.mp3
+  String get generateARhythmic => 'assets/sounds/generate-a-rhythmic.mp3';
+
+  /// List of all assets
+  List<String> get values =>
+      [addComplexRhythm, composeAFast, generateARhythmic];
+}
+
 class $AssetsImagesQuizGen {
   const $AssetsImagesQuizGen();
 
@@ -32,6 +49,7 @@ class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsSoundsGen sounds = $AssetsSoundsGen();
 }
 
 class AssetGenImage {
