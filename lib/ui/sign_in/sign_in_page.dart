@@ -22,30 +22,46 @@ class SignInPage extends HookConsumerWidget {
       builder: (context, ref, __) {
         return Column(
           children: [
-            TextField(
-              decoration: const InputDecoration(label: Text('Email')),
-              controller: emailController,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 100, 8, 8),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Email'),
+                ),
+                controller: emailController,
+              ),
             ),
-            TextField(
-              decoration: const InputDecoration(label: Text('Password')),
-              controller: passwordController,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text('Password'),
+                ),
+                controller: passwordController,
+              ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await ref.read(signInViewModelProvider.notifier).signIn(
-                      email: emailController.text,
-                      password: passwordController.text,
-                    );
-                if (!context.mounted) {
-                  return;
-                }
-                context.go(homePath);
-              },
-              child: const Text('Sign In'),
+            TextButton(onPressed: () {}, child: const Text('パスワードをお忘れですか？')),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () async {
+                  await ref.read(signInViewModelProvider.notifier).signIn(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
+                  if (!context.mounted) {
+                    return;
+                  }
+                  context.go(homePath);
+                },
+                child: const Text('サインイン'),
+              ),
             ),
             TextButton(
               onPressed: () => context.go(signUpPath),
-              child: const Text('Sign Up'),
+              child: const Text('アカウント作成'),
             ),
           ],
         );
