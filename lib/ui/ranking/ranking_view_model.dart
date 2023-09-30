@@ -1,8 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_honban/ui/base/base.dart';
+
+import '../base/base.dart';
 
 final rankingViewModelProvider =
-    ChangeNotifierProvider.autoDispose((ref) => RankingViewModel(ref));
+    ChangeNotifierProvider.autoDispose(RankingViewModel.new);
 
 class RankingViewModel extends BaseViewModel {
   RankingViewModel(super.ref);
