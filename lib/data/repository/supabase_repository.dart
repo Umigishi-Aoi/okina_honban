@@ -19,5 +19,6 @@ abstract class SupabaseRepository {
   Future<void> signUp({
     required String password,
     required String email,
+    required String userName,
   }) async {}
 }

@@ -13,14 +13,15 @@ class SignUpViewModel extends BaseViewModel {
 
   final SupabaseRepository _supabaseRepository;
 
-  Future<void> signUp({
-    required String email,
-    required String password,
-  }) async =>
+  Future<void> signUp(
+          {required String email,
+          required String password,
+          required String userName}) async =>
       await callFuture<void>(
         () async => await _supabaseRepository.signUp(
           password: password,
           email: email,
+          userName: userName,
         ),
       );
 }
