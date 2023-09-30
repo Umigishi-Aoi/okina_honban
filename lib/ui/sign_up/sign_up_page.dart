@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_honban/router/router_path.dart';
-import 'package:okina_honban/ui/base/base.dart';
-import 'package:okina_honban/ui/sign_up/sign_up_view_model.dart';
+
+import '../../router/router_path.dart';
+import '../base/base.dart';
+import 'sign_up_view_model.dart';
 
 class SignUpPage extends HookConsumerWidget {
   const SignUpPage({super.key});
@@ -37,9 +38,10 @@ class SignUpPage extends HookConsumerWidget {
             ElevatedButton(
               onPressed: () async {
                 await ref.read(signUpViewModelProvider.notifier).signUp(
-                    email: emailController.text,
-                    password: passwordController.text,
-                    userName: userNameController.text);
+                      email: emailController.text,
+                      password: passwordController.text,
+                      userName: userNameController.text,
+                    );
                 if (!context.mounted) {
                   return;
                 }

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_honban/ui/base/base.dart';
-import 'package:okina_honban/ui/sign_in/sign_in_view_model.dart';
 
 import '../../router/router_path.dart';
+import '../base/base.dart';
+import 'sign_in_view_model.dart';
 
 class SignInPage extends HookConsumerWidget {
   const SignInPage({super.key});
