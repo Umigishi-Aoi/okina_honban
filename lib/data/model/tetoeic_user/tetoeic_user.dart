@@ -5,14 +5,13 @@ part 'tetoeic_user.g.dart';
 
 @freezed
 class TetoeicUser with _$TetoeicUser {
+  const TetoeicUser._();
   const factory TetoeicUser({
     @Default('') String name,
-    @Default('') String id,
     DateTime? updatedAt,
     @Default(0) int score,
   }) = _TetoeicUser;
 
   factory TetoeicUser.fromJson(Map<String, dynamic> json) =>
       _$TetoeicUserFromJson(json);
-  TetoeicUser._();
 }

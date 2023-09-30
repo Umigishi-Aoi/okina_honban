@@ -31,7 +31,7 @@ class BaseViewModel extends ChangeNotifier {
     loadingState.state = false;
   }
 
-  Future<void> callFuture<T>(Future<T> Function() future,
+  Future<Result<T>> callFuture<T>(Future<T> Function() future,
       {bool isLoading = true}) async {
     final result = await Future.microtask(toLoading)
         .then((_) => Result.guardFuture(future))
@@ -41,5 +41,6 @@ class BaseViewModel extends ChangeNotifier {
       ref.read(errorStateProvider.notifier).state = result;
       notifyListeners();
     }
+    return result;
   }
 }

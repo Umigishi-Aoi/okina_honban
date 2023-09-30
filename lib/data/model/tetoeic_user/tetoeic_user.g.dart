@@ -9,7 +9,6 @@ part of 'tetoeic_user.dart';
 _$TetoeicUserImpl _$$TetoeicUserImplFromJson(Map<String, dynamic> json) =>
     _$TetoeicUserImpl(
       name: json['name'] as String? ?? '',
-      id: json['id'] as String? ?? '',
       updatedAt: json['updatedAt'] == null
           ? null
           : DateTime.parse(json['updatedAt'] as String),
@@ -19,7 +18,6 @@ _$TetoeicUserImpl _$$TetoeicUserImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$TetoeicUserImplToJson(_$TetoeicUserImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'id': instance.id,
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'score': instance.score,
     };
