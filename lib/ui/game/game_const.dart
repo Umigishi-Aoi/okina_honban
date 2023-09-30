@@ -1,2 +1,2 @@
-const wNum = 10;
-const hNum = 22;
+const kWNum = 10;
+const kHNum = 22;

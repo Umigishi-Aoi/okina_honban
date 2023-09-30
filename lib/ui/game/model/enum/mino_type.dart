@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:okina_honban/ui/game/model/enum/mino_direction.dart';
+import 'package:okina_honban/ui/game/model/position.dart';
 
 enum TetroMino { T, O, S, Z, L, J, I }
 
@@ -108,5 +110,37 @@ extension MinoPlacements on TetroMino {
       case TetroMino.I:
         return Colors.cyan;
     }
+  }
+
+  List<List<int>> calculatePlacement(MinoDirection minoDirection) {
+    switch (minoDirection) {
+      case MinoDirection.N:
+        return defaultPlacement;
+      case MinoDirection.E:
+        return defaultPlacement.map((row) => row.reversed.toList()).toList();
+      case MinoDirection.S:
+        return defaultPlacement.reversed.toList();
+      case MinoDirection.W:
+        return defaultPlacement
+            .map((row) => row.reversed.toList())
+            .toList()
+            .reversed
+            .toList();
+    }
+  }
+
+  List<List<Position>> calculatePositionMat(MinoDirection minoDirection) {
+    final List<List<int>> placement = calculatePlacement(minoDirection);
+    final List<List<Position>> positionMat = [];
+    for (int i = 0; i < placement.length; i++) {
+      final List<Position> positions = [];
+      for (int j = 0; j < placement[i].length; j++) {
+        if (placement[i][j] == 1) {
+          positions.add(Position(x: j, y: i));
+        }
+      }
+      positionMat.add(positions);
+    }
+    return positionMat;
   }
 }

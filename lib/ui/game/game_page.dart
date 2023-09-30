@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:okina_honban/ui/game/component/block_widget.dart';
-import 'package:okina_honban/ui/game/component/next_mino.dart';
+import 'package:okina_honban/ui/game/component/preview_mino.dart';
 import 'package:okina_honban/ui/game/game_const.dart';
 
 import 'game_view_model.dart';
@@ -48,10 +48,10 @@ class GamePage extends HookConsumerWidget {
     return HookConsumer(builder: (context, ref, child) {
       final blocks =
           ref.watch(gameViewModelProvider.select((value) => value.blocks));
-      final length = MediaQuery.of(context).size.height * 0.8 / hNum;
+      final length = MediaQuery.of(context).size.height * 0.8 / kHNum;
       return Expanded(
         child: GridView.count(
-            crossAxisCount: wNum,
+            crossAxisCount: kWNum,
             children: blocks
                 .map((block) => BlockWidget(
                       block: block,
@@ -66,7 +66,7 @@ class GamePage extends HookConsumerWidget {
     return HookConsumer(builder: (context, ref, child) {
       final nextMino =
           ref.watch(gameViewModelProvider.select((value) => value.nextMino));
-      final length = MediaQuery.of(context).size.height * 0.8 / hNum;
+      final length = MediaQuery.of(context).size.height * 0.8 / kHNum;
       return Container(
           width: length * 4,
           height: length * 2,
