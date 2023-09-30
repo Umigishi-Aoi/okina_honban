@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../router/router_path.dart';
@@ -38,7 +39,13 @@ class HomePage extends HookConsumerWidget {
   }
 
   Widget _buildText() {
-    return const Center(child: Text('TOEIC 対策'));
+    return Center(
+        child: Text(
+      'TOEIC 対策',
+      style: GoogleFonts.dotGothic16(
+        textStyle: const TextStyle(fontSize: 40),
+      ),
+    ));
   }
 
   Widget _buildGoToGamePageButton() {
