@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart' as r;
+import 'package:okina_honban/data/model/model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final supabaseRepositoryProvider =
@@ -21,4 +22,8 @@ abstract class SupabaseRepository {
     required String email,
     required String userName,
   }) async {}
+
+  Future<void> setScore({required TetoeicUser user});
+
+  Future<void> getScores();
 }

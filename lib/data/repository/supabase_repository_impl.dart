@@ -1,3 +1,4 @@
+import 'package:okina_honban/data/model/tetoeic_user/tetoeic_user.dart';
 import 'package:okina_honban/data/repository/supabase_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -42,4 +43,10 @@ class SupabaseRepositoryImpl extends SupabaseRepository {
       data: {'username': userName},
     );
   }
+
+  @override
+  Future<void> setScore({required TetoeicUser user}) async {}
+
+  @override
+  Future<void> getScores() async {}
 }
