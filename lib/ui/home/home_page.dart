@@ -69,11 +69,15 @@ class HomePage extends HookConsumerWidget {
   Widget _buildGoToGamePageButton() {
     return Builder(
       builder: (context) {
-        return ElevatedButton(
-          onPressed: () => context.go(gamePath),
-          child: Text(
-            'テトリス',
-            style: GoogleFonts.dotGothic16(),
+        return SizedBox(
+          width: 150,
+          height: 50,
+          child: ElevatedButton(
+            onPressed: () => context.go(gamePath),
+            child: Text(
+              'テトリス',
+              style: GoogleFonts.dotGothic16(),
+            ),
           ),
         );
       },
@@ -83,9 +87,13 @@ class HomePage extends HookConsumerWidget {
   Widget _buildRankingButton() {
     return Builder(
       builder: (context) {
-        return ElevatedButton(
-          onPressed: () => context.push(rankingPath),
-          child: Text('ランキング', style: GoogleFonts.dotGothic16()),
+        return SizedBox(
+          width: 150,
+          height: 50,
+          child: ElevatedButton(
+            onPressed: () => context.push(rankingPath),
+            child: Text('ランキング', style: GoogleFonts.dotGothic16()),
+          ),
         );
       },
     );
