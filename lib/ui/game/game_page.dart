@@ -1,16 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:okina_honban/foundation/audio_player_helper.dart';
 import 'package:okina_honban/ui/game/component/block_widget.dart';
 import 'package:okina_honban/ui/game/game_const.dart';
 
 import 'game_view_model.dart';
 
-class GamePage extends HookConsumerWidget {
+class GamePage extends StatefulHookConsumerWidget {
   const GamePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(body: _buildBody());
+  ConsumerState<ConsumerStatefulWidget> createState() => _GamePageState();
+}
+
+class _GamePageState extends ConsumerState<GamePage> {
+  @override
+  void initState() {
+    AudioPlayerHelper().play(Bgm.palying.name);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    AudioPlayerHelper().pause();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        AudioPlayerHelper().pause();
+        return true;
+      },
+      child: Scaffold(
+        body: _buildBody(),
+      ),
+    );
   }
 
   Widget _buildBody() {
