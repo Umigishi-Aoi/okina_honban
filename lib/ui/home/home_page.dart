@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../router/router_path.dart';
@@ -38,7 +40,30 @@ class HomePage extends HookConsumerWidget {
   }
 
   Widget _buildText() {
-    return const Center(child: Text('TOEIC 対策'));
+    return Center(
+      child: Text(
+        'TOEIC 対策',
+        style: GoogleFonts.dotGothic16(
+          textStyle: const TextStyle(fontSize: 50),
+        ),
+      )
+          .animate(onPlay: (controller) => controller.repeat())
+          .shake(
+              hz: 4,
+              curve: Curves.easeInOutCubic,
+              delay: 2000.ms,
+              duration: 1800.ms)
+          .scale(
+            begin: const Offset(1, 1),
+            end: const Offset(1.1, 1.1),
+            duration: 600.ms,
+          )
+          .then(delay: 300.ms)
+          .scale(
+            begin: const Offset(1, 1),
+            end: const Offset(1 / 1.1, 1 / 1.1),
+          ),
+    );
   }
 
   Widget _buildGoToGamePageButton() {
@@ -46,7 +71,10 @@ class HomePage extends HookConsumerWidget {
       builder: (context) {
         return ElevatedButton(
           onPressed: () => context.go(gamePath),
-          child: const Text('テトリス'),
+          child: Text(
+            'テトリス',
+            style: GoogleFonts.dotGothic16(),
+          ),
         );
       },
     );
@@ -56,8 +84,8 @@ class HomePage extends HookConsumerWidget {
     return Builder(
       builder: (context) {
         return ElevatedButton(
-          onPressed: () => context.go(rankingPath),
-          child: const Text('ランキング'),
+          onPressed: () => context.push(rankingPath),
+          child: Text('ランキング', style: GoogleFonts.dotGothic16()),
         );
       },
     );
