@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:okina_honban/ui/game/component/block_widget.dart';
 import 'package:okina_honban/ui/game/component/preview_mino.dart';
+import 'package:okina_honban/ui/game/game_background.dart';
 import 'package:okina_honban/ui/game/game_const.dart';
 
 import 'game_view_model.dart';
@@ -11,14 +12,19 @@ class GamePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(body: SafeArea(child: _buildBody()));
+    return Scaffold(body: _buildBody());
   }
 
   Widget _buildBody() {
-    return Column(
+    return Stack(
       children: [
-        _buildMainBox(),
-        _buildButtons(),
+        const GameBackground(),
+        Column(
+          children: [
+            _buildMainBox(),
+            _buildButtons(),
+          ],
+        )
       ],
     );
   }
