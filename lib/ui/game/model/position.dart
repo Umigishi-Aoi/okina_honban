@@ -10,5 +10,4 @@ class Position with _$Position {
   }) = _Position;
 
   const Position._();
-
 }
