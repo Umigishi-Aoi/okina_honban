@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'tetoiec_user.dart';
+part of 'tetoeic_user.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TetoiecUserImpl _$$TetoiecUserImplFromJson(Map<String, dynamic> json) =>
-    _$TetoiecUserImpl(
+_$TetoeicUserImpl _$$TetoeicUserImplFromJson(Map<String, dynamic> json) =>
+    _$TetoeicUserImpl(
       name: json['name'] as String? ?? '',
       id: json['id'] as String? ?? '',
       updatedAt: json['updatedAt'] == null
@@ -16,7 +16,7 @@ _$TetoiecUserImpl _$$TetoiecUserImplFromJson(Map<String, dynamic> json) =>
       score: json['score'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$$TetoiecUserImplToJson(_$TetoiecUserImpl instance) =>
+Map<String, dynamic> _$$TetoeicUserImplToJson(_$TetoeicUserImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'id': instance.id,
