@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:okina_honban/ui/base/base.dart';
 import 'package:okina_honban/ui/ranking/ranking_view_model.dart';
@@ -36,14 +37,37 @@ class RankingPage extends HookConsumerWidget {
   }
 
   Widget _buildText() {
-    return const Center(child: Text('ランキング'));
+    return Center(
+      child: Text(
+        'スコアランキング',
+        style: GoogleFonts.dotGothic16(
+          textStyle: const TextStyle(fontSize: 50),
+        ),
+      ),
+    );
   }
 
   Widget _buildRankingList(List<TetoeicUser> users) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 600) {
+          return _buildRankingBuilder(
+            users,
+            constraints.maxWidth * 0.8,
+          );
+        } else {
+          return _buildRankingBuilder(users, 500);
+        }
+      },
+    );
+  }
+
+  Widget _buildRankingBuilder(List<TetoeicUser> users, double width) {
     return HookConsumer(
       builder: (context, ref, __) {
         return Container(
           height: 400,
+          width: width,
           margin: const EdgeInsets.all(16),
           padding: const EdgeInsets.only(top: 10, bottom: 10),
           decoration: BoxDecoration(
@@ -56,9 +80,18 @@ class RankingPage extends HookConsumerWidget {
               final user = users[index];
               return Card(
                 child: ListTile(
-                  leading: Text('${index + 1}'),
-                  title: Text(user.name),
-                  trailing: Text('${user.score}'),
+                  leading: Text(
+                    '${index + 1}.',
+                    style: GoogleFonts.dotGothic16(),
+                  ),
+                  title: Text(
+                    user.name,
+                    style: GoogleFonts.dotGothic16(),
+                  ),
+                  trailing: Text(
+                    '${user.score}',
+                    style: GoogleFonts.dotGothic16(),
+                  ),
                 ),
               );
             },
@@ -73,7 +106,7 @@ class RankingPage extends HookConsumerWidget {
       builder: (context) {
         return ElevatedButton(
           onPressed: () => context.go(homePath),
-          child: const Text('戻る'),
+          child: Text('戻る', style: GoogleFonts.dotGothic16()),
         );
       },
     );
