@@ -1,3 +1,4 @@
+import 'package:okina_honban/ui/complete_game/complete_game_page.dart';
 import 'dart:async';
 import 'dart:developer';
 
@@ -34,6 +35,10 @@ final routerProvider = r.Provider((ref) {
     routes: [
       // INSERT ROUTE HERE
 
+    GoRoute(
+        path: completeGamePath,
+        pageBuilder: (context, state) => const MaterialPage(child: CompleteGamePage()),
+    ),
       GoRoute(
         path: signUpPath,
         pageBuilder: (context, state) =>
