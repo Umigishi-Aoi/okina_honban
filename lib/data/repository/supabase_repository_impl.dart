@@ -52,5 +52,11 @@ class SupabaseRepositoryImpl extends SupabaseRepository {
   }
 
   @override
-  Future<void> getScores() async {}
+  Future<List<TetoeicUser>> getScores() async {
+    final scores = await _supabaseClient
+        .from(Tables.ranking.name)
+        .select<PostgrestList>('name, score')
+        .order('score', ascending: false);
+    return scores.map((e) => TetoeicUser.fromJson(e)).toList();
+  }
 }

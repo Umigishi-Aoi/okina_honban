@@ -25,5 +25,5 @@ abstract class SupabaseRepository {
 
   Future<void> setScore({required TetoeicUser user});
 
-  Future<void> getScores();
+  Future<List<TetoeicUser>> getScores();
 }
