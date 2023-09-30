@@ -84,7 +84,7 @@ class HomePage extends HookConsumerWidget {
     return Builder(
       builder: (context) {
         return ElevatedButton(
-          onPressed: () => context.go(rankingPath),
+          onPressed: () => context.push(rankingPath),
           child: Text('ランキング', style: GoogleFonts.dotGothic16()),
         );
       },
