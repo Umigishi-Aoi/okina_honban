@@ -10,4 +10,18 @@ class Position with _$Position {
   }) = _Position;
 
   const Position._();
+
+  Position operator +(Position other) {
+    return Position(
+      x: x + other.x,
+      y: y + other.y,
+    );
+  }
+
+  Position operator -(Position other) {
+    return Position(
+      x: x - other.x,
+      y: y - other.y,
+    );
+  }
 }
