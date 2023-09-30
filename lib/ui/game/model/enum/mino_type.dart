@@ -15,9 +15,8 @@ extension MinoPlacements on TetroMino {
         ];
       case TetroMino.O:
         return [
-          [0, 0, 0],
-          [0, 1, 1],
-          [0, 1, 1],
+          [1, 1],
+          [1, 1]
         ];
       case TetroMino.S:
         return [
@@ -45,10 +44,10 @@ extension MinoPlacements on TetroMino {
         ];
       case TetroMino.I:
         return [
-          [0, 0, 0, 0],
-          [0, 0, 0, 0],
-          [1, 1, 1, 1],
-          [0, 0, 0, 0],
+          [0, 1, 0, 0],
+          [0, 1, 0, 0],
+          [0, 1, 0, 0],
+          [0, 1, 0, 0],
         ];
     }
   }
@@ -142,5 +141,21 @@ extension MinoPlacements on TetroMino {
       positionMat.add(positions);
     }
     return positionMat;
+  }
+
+  int getMinoSize() {
+    switch (this) {
+      case TetroMino.T:
+        return 3;
+      case TetroMino.O:
+        return 2;
+      case TetroMino.S:
+      case TetroMino.Z:
+      case TetroMino.L:
+      case TetroMino.J:
+        return 3;
+      case TetroMino.I:
+        return 4;
+    }
   }
 }

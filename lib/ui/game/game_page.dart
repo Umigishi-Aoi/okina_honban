@@ -18,6 +18,7 @@ class GamePage extends HookConsumerWidget {
     return Column(
       children: [
         _buildMainBox(),
+        _buildButtons(),
       ],
     );
   }
@@ -77,5 +78,40 @@ class GamePage extends HookConsumerWidget {
           child:
               Center(child: PreviewMino(tetroMino: nextMino, length: length)));
     });
+  }
+
+  Widget _buildButtons() {
+    return HookConsumer(
+      builder: (_, ref, __) {
+        final notifier = ref.watch(gameViewModelProvider.notifier);
+        return Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: notifier.goLeft,
+                      child: const Text('←'),
+                    ),
+                    ElevatedButton(
+                      onPressed: notifier.goRight,
+                      child: const Text('→'),
+                    ),
+                  ],
+                ),
+                ElevatedButton(
+                  onPressed: notifier.goDown,
+                  child: const Text('↓'),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
   }
 }
