@@ -4,8 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:okina_honban/ui/base/base.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class CompleteGamePage extends HookConsumerWidget {
-  const CompleteGamePage({super.key});
+class GameOverPage extends HookConsumerWidget {
+  const GameOverPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -17,12 +17,6 @@ class CompleteGamePage extends HookConsumerWidget {
     return HookConsumer(
       builder: (context, ref, __) {
         return LayoutBuilder(builder: (context, constraint) {
-          bool visible = false;
-          if (constraint.maxWidth > 600) {
-            visible = true;
-          } else {
-            visible = false;
-          }
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -32,12 +26,12 @@ class CompleteGamePage extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(
-                      Icons.check_circle,
-                      color: Colors.green,
+                      Icons.smart_toy,
+                      color: Colors.red,
                       size: 100,
                     ),
                     Text(
-                      'Mission Complete!!',
+                      'GAME OVER',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
@@ -53,6 +47,8 @@ class CompleteGamePage extends HookConsumerWidget {
                                   'スコア',
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
+
+                                /// TODO: supabaseに登録してから表示する？
                                 Text(
                                   '100',
                                   style:
@@ -61,8 +57,6 @@ class CompleteGamePage extends HookConsumerWidget {
                               ],
                             ),
                           ),
-
-                          /// TODO: 名前をsupabaseから取ってきて表示する
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Column(
@@ -90,7 +84,6 @@ class CompleteGamePage extends HookConsumerWidget {
                               height: 100,
                             ),
                           ),
-
                           Visibility(
                             visible: youtubeUrl.isNotEmpty,
                             child: Container(
@@ -107,7 +100,6 @@ class CompleteGamePage extends HookConsumerWidget {
                     ),
                   ],
                 ),
-                // TODO: 画像はsupabaseで用意しているものをランク別に表示する
                 rowButtons(constraint.maxWidth, context),
                 columnButtons(constraint.maxWidth, context),
               ],
@@ -118,7 +110,7 @@ class CompleteGamePage extends HookConsumerWidget {
     );
   }
 
-  Widget rowButtons(double maxWidth, BuildContext context) {
+  Widget columnButtons(double maxWidth, BuildContext context) {
     return Visibility(
       visible: maxWidth < 600,
       child: Column(
@@ -154,7 +146,7 @@ class CompleteGamePage extends HookConsumerWidget {
     );
   }
 
-  Widget columnButtons(double maxWidth, BuildContext context) {
+  Widget rowButtons(double maxWidth, BuildContext context) {
     return Visibility(
       visible: maxWidth > 600,
       child: Row(
@@ -165,11 +157,11 @@ class CompleteGamePage extends HookConsumerWidget {
               vertical: 4.0,
               horizontal: 16.0,
             ),
-            child: TextButton(
+            child: ElevatedButton(
               onPressed: () {
-                // TODO: ホームに戻る遷移処理を書く
+                context.pop();
               },
-              child: const Text('ホームに戻る'),
+              child: const Text('もう一回遊ぶ'),
             ),
           ),
           Padding(
@@ -177,11 +169,11 @@ class CompleteGamePage extends HookConsumerWidget {
               vertical: 4.0,
               horizontal: 16.0,
             ),
-            child: ElevatedButton(
+            child: TextButton(
               onPressed: () {
-                context.pop();
+                // TODO: ホームに戻る遷移処理を書く
               },
-              child: const Text('もう一回遊ぶ'),
+              child: const Text('ホームに戻る'),
             ),
           ),
         ],

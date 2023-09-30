@@ -1,12 +1,12 @@
-import 'package:okina_honban/ui/complete_game/complete_game_page.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as r;
 import 'package:okina_honban/router/router_path.dart';
-import 'package:okina_honban/ui/ranking/ranking_page.dart';
+import 'package:okina_honban/ui/complete_game/game_over_page.dart';
 import 'package:okina_honban/ui/game/game_page.dart';
+import 'package:okina_honban/ui/ranking/ranking_page.dart';
 import 'package:okina_honban/ui/sign_in/sign_in_page.dart';
 import 'package:okina_honban/ui/sign_up/sign_up_page.dart';
 
@@ -36,10 +36,11 @@ final routerProvider = r.Provider((ref) {
     routes: [
       // INSERT ROUTE HERE
 
-    GoRoute(
+      GoRoute(
         path: completeGamePath,
-        pageBuilder: (context, state) => const MaterialPage(child: CompleteGamePage()),
-    ),
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: GameOverPage()),
+      ),
       GoRoute(
         path: gamePath,
         pageBuilder: (context, state) => const MaterialPage(child: GamePage()),
