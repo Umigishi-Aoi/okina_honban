@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -14,9 +13,9 @@ import '../ui/home/home_page.dart';
 final routerProvider = r.Provider((ref) {
   final authState = ref.watch(supabaseRepositoryProvider).authState;
   return GoRouter(
-    initialLocation: homePath,
+    initialLocation: null,
     redirect: (_, state) async {
-      String? path = homePath;
+      String? path;
       bool isSignIn = ref.read(supabaseRepositoryProvider).currentUser != null;
       String currentPath = state.matchedLocation;
 
@@ -26,8 +25,8 @@ final routerProvider = r.Provider((ref) {
         } else {
           path = signInPath;
         }
+        return path;
       }
-      log('path=$path');
       return path;
     },
     refreshListenable: GoRouterRefreshStream(authState),
@@ -58,7 +57,6 @@ class GoRouterRefreshStream extends ChangeNotifier {
     notifyListeners();
     _subscription = stream.asBroadcastStream().listen(
       (dynamic _) {
-        log('notifyListeners');
         notifyListeners();
       },
     );
