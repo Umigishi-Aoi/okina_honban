@@ -37,5 +37,7 @@ dependency_overrides:
   analyzer: '>=4.7.0 <7.0.0'
 
 flutter:
+  assets:
+    - assets/images/quiz/
 
   uses-material-design: true
