@@ -85,6 +85,7 @@ class GamePage extends HookConsumerWidget {
       builder: (_, ref, __) {
         final notifier = ref.watch(gameViewModelProvider.notifier);
         return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -108,6 +109,10 @@ class GamePage extends HookConsumerWidget {
                   child: const Text('↓'),
                 ),
               ],
+            ),
+            ElevatedButton(
+              onPressed: () => notifier.setMinoDirection(),
+              child: const Text('Rotate'),
             ),
           ],
         );

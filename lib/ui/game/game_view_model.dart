@@ -122,7 +122,7 @@ class GameViewModel extends BaseViewModel {
     _mergedBlockMat = mat;
   }
 
-  List<List<Block>> resetMap() {
+  List<List<Block>> resetMat() {
     List<List<Block>> mat = _placedBlockMat;
 
     for (int i = 0;
@@ -147,7 +147,7 @@ class GameViewModel extends BaseViewModel {
       return;
     }
 
-    List<List<Block>> mat = resetMap();
+    List<List<Block>> mat = resetMat();
 
     _currentPosition = _currentPosition! + const Position(x: 0, y: -1);
 
@@ -164,7 +164,7 @@ class GameViewModel extends BaseViewModel {
       return;
     }
 
-    List<List<Block>> mat = resetMap();
+    List<List<Block>> mat = resetMat();
 
     _currentPosition = _currentPosition! + const Position(x: 0, y: 1);
 
@@ -181,11 +181,31 @@ class GameViewModel extends BaseViewModel {
       return;
     }
 
-    List<List<Block>> mat = resetMap();
+    List<List<Block>> mat = resetMat();
 
     _currentPosition = _currentPosition! + const Position(x: 1, y: 0);
 
     updateMat(mat);
+    notifyListeners();
+  }
+
+  void setMinoDirection() {
+    final temp = _currentMinoDirection!.rotate();
+
+//回転ではみ出たら更新しない
+    if (_currentPosition!.y + (_currentMino!.getMinoSizeY(temp) - 1) + 1 >
+            kWNum - 1 ||
+        _currentPosition!.x + (_currentMino!.getMinoSizeX(temp) - 1) + 1 >
+            kHNum - 1) {
+      return;
+    }
+
+    List<List<Block>> mat = resetMat();
+
+    _currentMinoDirection = temp;
+
+    updateMat(mat);
+
     notifyListeners();
   }
 }

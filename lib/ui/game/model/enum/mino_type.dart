@@ -127,9 +127,15 @@ extension MinoPlacements on TetroMino {
         }
         return result;
       case MinoDirection.S:
-        return defaultPlacement.reversed.toList();
+        return defaultPlacement.reversed
+            .toList()
+            .map((e) => e.reversed.toList())
+            .toList();
       case MinoDirection.W:
-        final reversed = defaultPlacement.reversed.toList();
+        final reversed = defaultPlacement.reversed
+            .toList()
+            .map((e) => e.reversed.toList())
+            .toList();
         final N = reversed.length;
         final List<List<int>> result = [];
         for (int i = 0; i < N; i++) {
@@ -193,7 +199,7 @@ extension MinoPlacements on TetroMino {
           case MinoDirection.S:
             return 3;
           case MinoDirection.W:
-            return 2;
+            return 3;
         }
       case TetroMino.L:
         switch (minoDirection) {
@@ -204,7 +210,7 @@ extension MinoPlacements on TetroMino {
           case MinoDirection.S:
             return 3;
           case MinoDirection.W:
-            return 2;
+            return 3;
         }
       case TetroMino.J:
         switch (minoDirection) {
@@ -215,7 +221,7 @@ extension MinoPlacements on TetroMino {
           case MinoDirection.S:
             return 3;
           case MinoDirection.W:
-            return 2;
+            return 3;
         }
       case TetroMino.I:
         switch (minoDirection) {
