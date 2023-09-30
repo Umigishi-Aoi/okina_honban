@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_honban/ui/game/component/t_box_widget.dart';
+import 'package:okina_honban/ui/game/component/block_widget.dart';
 import 'package:okina_honban/ui/game/game_const.dart';
 
 import 'game_view_model.dart';
@@ -50,7 +50,7 @@ class GamePage extends HookConsumerWidget {
             crossAxisCount: wNum,
             children: tBoxesFlatten
                 .map((tBox) => TBoxWidget(
-                      tBox: tBox,
+                      block: tBox,
                       length: length,
                     ))
                 .toList()),
