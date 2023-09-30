@@ -25,6 +25,7 @@ dependencies:
   flutter_hooks: ^0.20.1
   flame: ^1.8.2
   url_launcher: ^6.1.14
+  audioplayers: ^5.1.0
 
 dev_dependencies:
   flutter_test:
