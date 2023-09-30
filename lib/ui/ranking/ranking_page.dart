@@ -21,12 +21,20 @@ class RankingPage extends HookConsumerWidget {
             Container(
               height: 400,
               margin: const EdgeInsets.all(16),
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: ListView.builder(
                 itemCount: 50,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: Text('$index'),
-                    title: const Text('User_Name'),
+                  return Card(
+                    child: ListTile(
+                      leading: Text('${index + 1}'),
+                      title: const Text('User_Name'),
+                      trailing: const Text('Score'),
+                    ),
                   );
                 },
               ),
