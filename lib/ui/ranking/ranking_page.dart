@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:okina_honban/ui/base/base.dart';
 import 'package:okina_honban/ui/ranking/ranking_view_model.dart';
 
+import '../../data/model/tetoeic_user/tetoeic_user.dart';
 import '../../router/router_path.dart';
-import '../base/base_page.dart';
 
 class RankingPage extends HookConsumerWidget {
   const RankingPage({super.key});
@@ -17,12 +18,17 @@ class RankingPage extends HookConsumerWidget {
   Widget _buildBody() {
     return HookConsumer(
       builder: (context, ref, __) {
+        final isLoading = ref.watch(loadingStateProvider.notifier).state;
+        final users =
+            ref.watch(rankingViewModelProvider.select((value) => value.users));
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildText(),
-            _buildRankingList(),
-            _buildBackButton(),
+            if (!isLoading && users != null) ...[
+              _buildText(),
+              _buildRankingList(users),
+              _buildBackButton(),
+            ]
           ],
         );
       },
@@ -33,10 +39,9 @@ class RankingPage extends HookConsumerWidget {
     return const Center(child: Text('ランキング'));
   }
 
-  Widget _buildRankingList() {
+  Widget _buildRankingList(List<TetoeicUser> users) {
     return HookConsumer(
       builder: (context, ref, __) {
-        final users = ref.watch(rankingViewModelProvider).users;
         return Container(
           height: 400,
           margin: const EdgeInsets.all(16),
@@ -48,7 +53,7 @@ class RankingPage extends HookConsumerWidget {
           child: ListView.builder(
             itemCount: 50,
             itemBuilder: (context, index) {
-              final user = users![index];
+              final user = users[index];
               return Card(
                 child: ListTile(
                   leading: Text('${index + 1}'),
