@@ -1,7 +1,6 @@
-import 'dart:core';
-
-const wNum = 10;
-const hNum = 22;
+const kWNum = 10;
+const kHNum = 15;
+const kStartPositionY = 3;
 
 const toeicWords = {
   "ability": "能力",
