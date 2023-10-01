@@ -19,6 +19,7 @@ class SignUpPage extends HookConsumerWidget {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final userNameController = useTextEditingController();
+    final isDisplay = useState(true);
     return HookConsumer(
       builder: (context, ref, __) {
         return Column(
@@ -41,16 +42,31 @@ class SignUpPage extends HookConsumerWidget {
                   label: Text('メールアドレス'),
                 ),
                 controller: emailController,
+                obscureText: true,
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('パスワード'),
+                decoration: InputDecoration(
+                  suffixIcon: isDisplay.value == true
+                      ? IconButton(
+                          icon: const Icon(Icons.visibility),
+                          onPressed: () {
+                            isDisplay.value = !isDisplay.value;
+                          },
+                        )
+                      : IconButton(
+                          icon: const Icon(Icons.visibility_off),
+                          onPressed: () {
+                            isDisplay.value = !isDisplay.value;
+                          },
+                        ),
+                  border: const OutlineInputBorder(),
+                  label: const Text('パスワード'),
                 ),
                 controller: passwordController,
+                obscureText: isDisplay.value,
               ),
             ),
             Padding(
