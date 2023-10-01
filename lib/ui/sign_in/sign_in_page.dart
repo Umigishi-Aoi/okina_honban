@@ -12,7 +12,7 @@ class SignInPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(body: _buildBody());
+    return Scaffold(body: _buildBody(), resizeToAvoidBottomInset: false);
   }
 
   Widget _buildBody() {
@@ -31,6 +31,7 @@ class SignInPage extends HookConsumerWidget {
                   return SizedBox(
                     width: constraints.maxWidth,
                     child: Column(
+
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
