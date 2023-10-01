@@ -13,7 +13,9 @@ class RankingPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return BasePage(body: _buildBody());
+    return BasePage(
+      
+      body: _buildBody());
   }
 
   Widget _buildBody() {
@@ -41,7 +43,7 @@ class RankingPage extends HookConsumerWidget {
       child: Text(
         'スコアランキング',
         style: GoogleFonts.dotGothic16(
-          textStyle: const TextStyle(fontSize: 50),
+          textStyle: const TextStyle(fontSize: 40),
         ),
       ),
     );
@@ -160,9 +162,21 @@ class RankingPage extends HookConsumerWidget {
   Widget _buildBackButton() {
     return Builder(
       builder: (context) {
-        return ElevatedButton(
-          onPressed: () => context.go(homePath),
-          child: Text('戻る', style: GoogleFonts.dotGothic16()),
+        return SizedBox(
+          width: 80,
+          height: 40,
+          child: ElevatedButton(
+              onPressed: () => context.go(homePath),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.grey[300],
+                shape: const LinearBorder(),
+              ),
+              child: Text('戻る',
+                  style: GoogleFonts.dotGothic16(
+                      textStyle: const TextStyle(
+                    fontSize: 20,
+                  )))),
         );
       },
     );
