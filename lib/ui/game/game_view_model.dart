@@ -73,7 +73,10 @@ class GameViewModel extends BaseViewModel {
       _priseText = PriseText.bad;
     }
     notifyListeners();
+    await Future.delayed(const Duration(milliseconds: 100));
+    fallWhenFailed();
     await Future.delayed(const Duration(seconds: 1));
+    notifyListeners();
     _priseText = null;
     notifyListeners();
     createQuiz();
