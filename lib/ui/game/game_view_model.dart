@@ -12,6 +12,10 @@ import '../../foundation/audio_player_helper.dart';
 import 'model/enum/mino_direction.dart';
 import 'model/quiz.dart';
 
+final scoreProvider = StateProvider(
+  (ref) => 0,
+);
+
 final gameViewModelProvider = ChangeNotifierProvider.autoDispose((ref) {
   ref.onDispose(() {
     AudioPlayerHelper().pause();
@@ -133,7 +137,7 @@ class GameViewModel extends BaseViewModel {
     _nextMino = createMino();
     _currentPosition = const Position(x: 0, y: kStartPositionY);
     _currentMinoDirection = MinoDirection.N;
-    clear();
+    updateScore(clear());
     _beforeBlockMat = mergedBlockMat;
     notifyListeners();
   }
@@ -349,5 +353,11 @@ class GameViewModel extends BaseViewModel {
       }
     }
     return false;
+  }
+
+  //スコアロジック
+  void updateScore(int point) {
+    ref.read(scoreProvider.notifier).state += point * point * 100;
+    notifyListeners();
   }
 }
