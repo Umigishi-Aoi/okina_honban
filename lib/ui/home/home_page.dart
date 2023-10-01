@@ -33,6 +33,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     return BasePage(
       appBar: BaseAppBar(
+        showBackButton: false,
         actions: [
           IconButton(
             onPressed: () async {
@@ -48,7 +49,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   Widget _buildBody() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         _buildText(),
         _buildGoToGamePageButton(),
@@ -60,9 +61,9 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget _buildText() {
     return Center(
       child: Text(
-        'TOEIC 対策',
+        'TeTOEIC',
         style: GoogleFonts.dotGothic16(
-          textStyle: const TextStyle(fontSize: 50),
+          textStyle: const TextStyle(fontSize: 60, fontWeight: FontWeight.w700),
         ),
       )
           .animate(onPlay: (controller) => controller.repeat())
@@ -87,11 +88,15 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget _buildGoToGamePageButton() {
     return Builder(
       builder: (context) {
-        return ElevatedButton(
-          onPressed: () => context.go(gamePath),
-          child: Text(
-            'テトリス',
-            style: GoogleFonts.dotGothic16(),
+        return SizedBox(
+          width: 150,
+          height: 50,
+          child: ElevatedButton(
+            onPressed: () => context.go(gamePath),
+            child: Text(
+              'テトリス',
+              style: GoogleFonts.dotGothic16(),
+            ),
           ),
         );
       },
@@ -101,9 +106,16 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget _buildRankingButton() {
     return Builder(
       builder: (context) {
-        return ElevatedButton(
-          onPressed: () => context.push(rankingPath),
-          child: Text('ランキング', style: GoogleFonts.dotGothic16()),
+        return SizedBox(
+          width: 150,
+          height: 50,
+          child: ElevatedButton(
+            onPressed: () => context.push(rankingPath),
+            child: Text(
+              'ランキング',
+              style: GoogleFonts.dotGothic16(),
+            ),
+          ),
         );
       },
     );
