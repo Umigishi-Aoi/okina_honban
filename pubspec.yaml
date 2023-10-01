@@ -26,6 +26,7 @@ dependencies:
   flame: ^1.8.2
   url_launcher: ^6.1.14
   audioplayers: ^5.1.0
+  flutter_shaders: ^0.1.2
 
 dev_dependencies:
   flutter_test:
@@ -43,5 +44,7 @@ flutter:
   assets:
     - assets/images/quiz/
     - assets/sounds/
+  shaders:
+    - shaders/game.glsl
 
   uses-material-design: true

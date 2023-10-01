@@ -1,34 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:okina_honban/foundation/audio_player_helper.dart';
 import 'package:okina_honban/ui/game/component/block_widget.dart';
 import 'package:okina_honban/ui/game/component/preview_mino.dart';
+import 'package:okina_honban/ui/game/game_background.dart';
 import 'package:okina_honban/ui/game/game_const.dart';
 
 import 'game_view_model.dart';
 
-class GamePage extends StatefulHookConsumerWidget {
+class GamePage extends HookConsumerWidget {
   const GamePage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _GamePageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    useEffect(() {
+      AudioPlayerHelper().play(Bgm.palying.name);
+      return null;
+    }, null);
 
-class _GamePageState extends ConsumerState<GamePage> {
-  @override
-  void initState() {
-    AudioPlayerHelper().play(Bgm.palying.name);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    AudioPlayerHelper().pause();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
         AudioPlayerHelper().pause();
@@ -41,10 +31,15 @@ class _GamePageState extends ConsumerState<GamePage> {
   }
 
   Widget _buildBody() {
-    return Column(
+    return Stack(
       children: [
-        _buildMainBox(),
-        _buildButtons(),
+        GameBackground(),
+        Column(
+          children: [
+            _buildMainBox(),
+            _buildButtons(),
+          ],
+        ),
       ],
     );
   }
