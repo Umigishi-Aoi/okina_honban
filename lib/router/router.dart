@@ -63,6 +63,11 @@ final routerProvider = r.Provider((ref) {
         path: rankingPath,
         pageBuilder: (context, state) =>
             const MaterialPage(child: RankingPage()),
+      ),
+      GoRoute(
+        path: gameOverPath,
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: GameOverPage()),
       )
     ],
   );

@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:okina_honban/foundation/audio_player_helper.dart';
+import 'package:okina_honban/router/router_path.dart';
 import 'package:okina_honban/ui/game/component/block_widget.dart';
 import 'package:okina_honban/ui/game/component/preview_mino.dart';
 import 'package:okina_honban/ui/game/game_background.dart';
@@ -20,6 +22,17 @@ class GamePage extends HookConsumerWidget {
       AudioPlayerHelper().play(Bgm.palying.name);
       return null;
     }, null);
+
+    ref.listen(gameViewModelProvider.select((value) => value.isGameOver),
+        (previous, next) {
+      if (next) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Future.delayed(Duration(seconds: 1), () {
+            context.pushReplacement(gameOverPath);
+          });
+        });
+      }
+    });
 
     return WillPopScope(
       onWillPop: () async {
