@@ -7,6 +7,7 @@ import 'package:okina_honban/foundation/audio_player_helper.dart';
 
 import '../../router/router_path.dart';
 import '../page_background/page_background.dart';
+import 'home_view_model.dart';
 
 class HomePage extends StatefulHookConsumerWidget {
   const HomePage({super.key});
@@ -39,14 +40,28 @@ class _HomePageState extends ConsumerState<HomePage> {
     return Stack(
       children: [
         const PageBackground(),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildText(),
-            _buildGoToGamePageButton(),
-            _buildRankingButton(),
-          ],
-        ),
+        LayoutBuilder(builder: (context, constraints) {
+          if (constraints.maxWidth < 600) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildText(),
+                _buildGoToGamePageButton(),
+                _buildRankingButton(),
+                _buildLogOutButton()
+              ],
+            );
+          }
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildText(),
+              _buildGoToGamePageButton(),
+              _buildRankingButton(),
+              _buildLogOutButton(),
+            ],
+          );
+        }),
       ],
     );
   }
@@ -112,6 +127,19 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildLogOutButton() {
+    return SizedBox(
+      width: 150,
+      height: 30,
+      child: ElevatedButton(
+        onPressed: () async {
+          await ref.watch(homeViewModelProvider).signOut();
+        },
+        child: const Text('ログアウト'),
+      ),
     );
   }
 }
