@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -7,7 +9,6 @@ import 'package:okina_honban/ui/game/component/preview_mino.dart';
 import 'package:okina_honban/ui/game/game_background.dart';
 import 'package:okina_honban/ui/game/game_const.dart';
 
-import '../../gen/assets.gen.dart';
 import 'game_view_model.dart';
 
 class GamePage extends HookConsumerWidget {
@@ -52,6 +53,7 @@ class GamePage extends HookConsumerWidget {
             ),
           ],
         ),
+        _buildPriseText(),
       ],
     );
   }
@@ -91,8 +93,7 @@ class GamePage extends HookConsumerWidget {
             color: Colors.white,
           ),
           onSubmitted: (value) {
-            final isCorrect = ref.read(gameViewModelProvider).answer == value;
-            checkAnswer(isCorrect, context);
+            ref.read(gameViewModelProvider).checkAnswer(value);
             textEditingController.clear();
           },
         ),
@@ -100,14 +101,32 @@ class GamePage extends HookConsumerWidget {
     });
   }
 
-  Future<void> checkAnswer(bool isCorrect, BuildContext context) async {
-    await showDialog(
-        context: context,
-        builder: (context) {
-          return isCorrect
-              ? Assets.images.quiz.maru.image()
-              : Assets.images.quiz.batu.image();
-        });
+  Widget _buildPriseText() {
+    return HookConsumer(builder: (context, ref, child) {
+      final priseText =
+          ref.watch(gameViewModelProvider.select((value) => value.priseText));
+      if (priseText == null) {
+        return const SizedBox();
+      }
+      final priseTextString = priseText.name;
+      final priseTextColor = priseText.color;
+      return Align(
+        alignment: Alignment(randomIntWithRange(), randomIntWithRange()),
+        child: Text(priseTextString,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: priseTextColor,
+            )),
+      );
+    });
+  }
+
+  double randomIntWithRange() {
+    double value = Random().nextDouble() - 0.3;
+    bool isMinus = Random().nextBool();
+    return value * (isMinus ? -1 : 1);
   }
 
   Widget _buildMainBox() {

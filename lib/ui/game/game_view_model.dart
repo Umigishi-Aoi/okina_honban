@@ -19,6 +19,17 @@ final gameViewModelProvider = ChangeNotifierProvider.autoDispose((ref) {
   return GameViewModel(ref);
 });
 
+enum PriseText {
+  excellent(Colors.yellow),
+  great(Colors.redAccent),
+  good(Colors.green),
+  bad(Colors.blue);
+
+  final Color color;
+
+  const PriseText(this.color);
+}
+
 class GameViewModel extends BaseViewModel {
   GameViewModel(super.ref) {
     _init();
@@ -39,6 +50,33 @@ class GameViewModel extends BaseViewModel {
       japanese: toeicWord.value,
     );
     notifyListeners();
+  }
+
+  int _correctCount = 0;
+
+  PriseText? _priseText;
+
+  PriseText? get priseText => _priseText;
+
+  Future<void> checkAnswer(String answerText) async {
+    if (answerText == answer) {
+      _correctCount++;
+      if (_correctCount >= 3) {
+        _priseText = PriseText.excellent;
+      } else if (_correctCount == 2) {
+        _priseText = PriseText.great;
+      } else if (_correctCount == 1) {
+        _priseText = PriseText.good;
+      }
+    } else {
+      _correctCount = 0;
+      _priseText = PriseText.bad;
+    }
+    notifyListeners();
+    await Future.delayed(const Duration(seconds: 1));
+    _priseText = null;
+    notifyListeners();
+    createQuiz();
   }
 
   final List<List<Block>> _placedBlockMat =
