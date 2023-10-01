@@ -132,13 +132,21 @@ class GamePage extends HookConsumerWidget {
   Widget _buildMainBox() {
     return HookConsumer(builder: (context, ref, child) {
       final width = MediaQuery.of(context).size.width * 0.8;
-      return Container(
+      return SizedBox(
           width: width,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildBlocks(),
-              _buildNextMinoPreview(),
+              Column(
+                children: [
+                  _buildNextMinoPreview(),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.1,
+                  ),
+                  _buildScore(),
+                ],
+              ),
             ],
           ));
     });
@@ -276,5 +284,19 @@ class GamePage extends HookConsumerWidget {
             color: Colors.black,
           )),
     );
+  }
+
+  //ポイント表示
+  Widget _buildScore() {
+    return HookConsumer(builder: (context, ref, __) {
+      final score = ref.watch(scoreProvider);
+      return Container(
+        alignment: Alignment.center,
+        width: MediaQuery.of(context).size.width * 0.2,
+        height: MediaQuery.of(context).size.height * 0.05,
+        color: Colors.white,
+        child: Text('$score'),
+      );
+    });
   }
 }
