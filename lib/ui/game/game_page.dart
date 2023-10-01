@@ -33,7 +33,7 @@ class GamePage extends HookConsumerWidget {
   Widget _buildBody() {
     return Stack(
       children: [
-        GameBackground(),
+        const GameBackground(),
         Column(
           children: [
             _buildMainBox(),
@@ -115,29 +115,89 @@ class GamePage extends HookConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
-                      onPressed: notifier.goLeft,
-                      child: const Text('←'),
-                    ),
-                    ElevatedButton(
-                      onPressed: notifier.goRight,
-                      child: const Text('→'),
-                    ),
+                    _leftButtonWidget(notifier.goLeft),
+                    _rightButtonWidget(notifier.goRight),
                   ],
                 ),
-                ElevatedButton(
-                  onPressed: notifier.goDown,
-                  child: const Text('↓'),
-                ),
+                _downButtonWidget(notifier.goDown),
               ],
             ),
-            ElevatedButton(
-              onPressed: () => notifier.setMinoDirection(),
-              child: const Text('Rotate'),
-            ),
+            _rotateButtonWidget(notifier.setMinoDirection),
           ],
         );
       },
+    );
+  }
+
+  /// 左ボタン
+  Widget _leftButtonWidget(Function function) {
+    return IconButton(
+      onPressed: () {
+        function();
+      },
+      icon: const Icon(
+        Icons.arrow_circle_left,
+        color: Colors.white,
+      ),
+      iconSize: 60,
+    );
+  }
+
+  /// 下ボタン
+  Widget _downButtonWidget(Function function) {
+    return SizedBox(
+      height: 50,
+      width: 50,
+      child: ElevatedButton(
+          style: ButtonStyle(
+            padding: MaterialStateProperty.all(
+                const EdgeInsets.all(0)), // 内部パディングを0に設定
+            alignment: Alignment.center,
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            shape: MaterialStateProperty.all<OutlinedBorder?>(
+              const CircleBorder(),
+            ),
+          ),
+          onPressed: () {
+            function();
+          },
+          child: const Icon(
+            Icons.arrow_downward,
+            color: Colors.black,
+          )),
+    );
+  }
+
+  /// 右ボタン
+  Widget _rightButtonWidget(Function function) {
+    return IconButton(
+        onPressed: () {
+          function();
+        },
+        iconSize: 60,
+        icon: const Icon(
+          Icons.arrow_circle_right,
+          color: Colors.white,
+        ));
+  }
+
+  /// 回転ボタン
+  Widget _rotateButtonWidget(Function function) {
+    return SizedBox(
+      height: 60,
+      width: 60,
+      child: ElevatedButton(
+          onPressed: () {
+            function();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            shape: const CircleBorder(),
+          ),
+          child: const Icon(
+            Icons.rotate_90_degrees_cw,
+            color: Colors.black,
+          )),
     );
   }
 }
