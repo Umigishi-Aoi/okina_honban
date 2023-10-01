@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:okina_honban/ui/base/base.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../game/game_view_model.dart';
 
 class GameOverPage extends HookConsumerWidget {
   const GameOverPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return BasePage(body: _buildBody());
+    return Scaffold(body: _buildBody());
   }
 
   Widget _buildBody() {
@@ -50,49 +51,11 @@ class GameOverPage extends HookConsumerWidget {
 
                                 /// TODO: supabaseに登録してから表示する？
                                 Text(
-                                  '100',
+                                  ref.watch(scoreProvider).toString(),
                                   style:
                                       Theme.of(context).textTheme.displaySmall,
                                 ),
                               ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              children: [
-                                Text(
-                                  'ランク',
-                                  style: Theme.of(context).textTheme.titleLarge,
-                                ),
-
-                                /// TODO: supabaseに登録してから表示する？
-                                Text(
-                                  'S+',
-                                  style:
-                                      Theme.of(context).textTheme.displaySmall,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: 200,
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.network(
-                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-YgNJiTuKTA3j21SBKYfg6AyulClIsHNhiQ&usqp=CAU',
-                              width: 100,
-                              height: 100,
-                            ),
-                          ),
-                          Visibility(
-                            visible: youtubeUrl.isNotEmpty,
-                            child: Container(
-                              width: constraint.maxWidth / 3,
-                              padding: const EdgeInsets.all(16.0),
-                              child: TextButton(
-                                onPressed: () => _launchURL(youtubeUrl),
-                                child: const Text(youtubeUrl),
-                              ),
                             ),
                           ),
                         ],

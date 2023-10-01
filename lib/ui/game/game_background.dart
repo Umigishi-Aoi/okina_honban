@@ -65,6 +65,6 @@ class Stars extends Game {
 
   @override
   void update(double dt) {
-    time += dt * 10;
+    time += dt * 3;
   }
 }
