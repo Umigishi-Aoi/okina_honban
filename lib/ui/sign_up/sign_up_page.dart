@@ -36,7 +36,9 @@ class SignUpPage extends HookConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(8, 100, 8, 8),
                         child: Container(
-                          color: Colors.white,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                          ),
                           width: constraints.maxWidth * 0.8,
                           child: TextFormField(
                             decoration: const InputDecoration(
@@ -50,7 +52,9 @@ class SignUpPage extends HookConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          color: Colors.white,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                          ),
                           width: constraints.maxWidth * 0.8,
                           child: TextFormField(
                             decoration: const InputDecoration(
@@ -65,7 +69,9 @@ class SignUpPage extends HookConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          color: Colors.white,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                          ),
                           width: constraints.maxWidth * 0.8,
                           child: TextFormField(
                             decoration: InputDecoration(
@@ -129,7 +135,9 @@ class SignUpPage extends HookConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 100, 8, 8),
                       child: Container(
-                        color: Colors.white,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                        ),
                         width: 500,
                         child: TextFormField(
                           decoration: const InputDecoration(
@@ -143,7 +151,9 @@ class SignUpPage extends HookConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        color: Colors.white,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                        ),
                         width: 500,
                         child: TextFormField(
                           decoration: const InputDecoration(
@@ -158,7 +168,9 @@ class SignUpPage extends HookConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        color: Colors.white,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                        ),
                         width: 500,
                         child: TextFormField(
                           decoration: InputDecoration(
