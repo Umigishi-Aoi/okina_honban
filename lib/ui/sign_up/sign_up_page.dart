@@ -12,7 +12,7 @@ class SignUpPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(body: _buildBody());
+    return Scaffold(body: _buildBody(), resizeToAvoidBottomInset: false);
   }
 
   Widget _buildBody() {
