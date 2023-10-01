@@ -7,6 +7,7 @@ import 'package:okina_honban/ui/game/component/preview_mino.dart';
 import 'package:okina_honban/ui/game/game_background.dart';
 import 'package:okina_honban/ui/game/game_const.dart';
 
+import '../../gen/assets.gen.dart';
 import 'game_view_model.dart';
 
 class GamePage extends HookConsumerWidget {
@@ -33,34 +34,83 @@ class GamePage extends HookConsumerWidget {
   Widget _buildBody() {
     return Stack(
       children: [
-        GameBackground(),
-        Column(
-          children: [
-            _buildMainBox(),
-            _buildButtons(),
-          ],
+        const GameBackground(),
+        Expanded(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 40,
+              ),
+              _buildQuestion(),
+              Expanded(child: _buildMainBox()),
+              _buildButtons(),
+              const SizedBox(
+                height: 40,
+              ),
+            ],
+          ),
         ),
       ],
     );
   }
 
+  Widget _buildQuestion() {
+    return HookConsumer(builder: (context, ref, child) {
+      final question =
+          ref.watch(gameViewModelProvider.select((value) => value.question));
+      return question != null
+          ? Text(question,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ))
+          : const SizedBox();
+    });
+  }
+
+  Widget _buildAnswerField() {
+    return HookConsumer(builder: (context, ref, child) {
+      final textEditingController = useTextEditingController();
+      return Container(
+        height: 50,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey, width: 1),
+          color: Colors.black45.withOpacity(0.5),
+        ),
+        child: TextField(
+          controller: textEditingController,
+          textAlign: TextAlign.center,
+          onSubmitted: (value) {
+            final isCorrect = ref.read(gameViewModelProvider).answer == value;
+            checkAnswer(isCorrect, context);
+            textEditingController.clear();
+          },
+        ),
+      );
+    });
+  }
+
+  Future<void> checkAnswer(bool isCorrect, BuildContext context) async {
+    await showDialog(
+        context: context,
+        builder: (context) {
+          return isCorrect
+              ? Assets.images.quiz.maru.image()
+              : Assets.images.quiz.batu.image();
+        });
+  }
+
   Widget _buildMainBox() {
     return HookConsumer(builder: (context, ref, child) {
-      final height = MediaQuery.of(context).size.height * 0.8;
+      final width = MediaQuery.of(context).size.width * 0.8;
       return Container(
-          height: height,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 4),
-          ),
+          width: width,
           child: Row(
             children: [
               _buildBlocks(),
-              Column(
-                children: [
-                  _buildNextMinoPreview(),
-                  const Spacer(),
-                ],
-              )
+              _buildNextMinoPreview(),
             ],
           ));
     });
@@ -70,7 +120,7 @@ class GamePage extends HookConsumerWidget {
     return HookConsumer(builder: (context, ref, child) {
       final blocks =
           ref.watch(gameViewModelProvider.select((value) => value.blocks));
-      final length = MediaQuery.of(context).size.height * 0.8 / kHNum;
+      final length = MediaQuery.of(context).size.width * 0.8 / kHNum;
       return Expanded(
         child: GridView.count(
             crossAxisCount: kWNum,
@@ -88,7 +138,7 @@ class GamePage extends HookConsumerWidget {
     return HookConsumer(builder: (context, ref, child) {
       final nextMino =
           ref.watch(gameViewModelProvider.select((value) => value.nextMino));
-      final length = MediaQuery.of(context).size.height * 0.8 / kHNum;
+      final length = MediaQuery.of(context).size.width * 0.8 / kHNum;
       return Container(
           width: length * 4,
           height: length * 2,
@@ -96,8 +146,7 @@ class GamePage extends HookConsumerWidget {
             border: Border.all(color: Colors.white, width: 4),
             color: Colors.black,
           ),
-          child:
-              Center(child: PreviewMino(tetroMino: nextMino, length: length)));
+          child: PreviewMino(tetroMino: nextMino, length: length));
     });
   }
 

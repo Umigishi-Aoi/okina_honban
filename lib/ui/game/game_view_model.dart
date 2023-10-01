@@ -10,6 +10,7 @@ import 'package:okina_honban/ui/game/model/position.dart';
 
 import '../../foundation/audio_player_helper.dart';
 import 'model/enum/mino_direction.dart';
+import 'model/quiz.dart';
 
 final gameViewModelProvider = ChangeNotifierProvider.autoDispose((ref) {
   ref.onDispose(() {
@@ -21,6 +22,23 @@ final gameViewModelProvider = ChangeNotifierProvider.autoDispose((ref) {
 class GameViewModel extends BaseViewModel {
   GameViewModel(super.ref) {
     _init();
+    createQuiz();
+  }
+
+  Quiz? _quiz;
+  Quiz? get quiz => _quiz;
+
+  String? get answer => _quiz?.english;
+
+  String? get question => _quiz?.japanese;
+  void createQuiz() {
+    final toeicWord =
+        toeicWords.entries.elementAt(Random().nextInt(toeicWords.length));
+    _quiz = Quiz(
+      english: toeicWord.key,
+      japanese: toeicWord.value,
+    );
+    notifyListeners();
   }
 
   final List<List<Block>> _placedBlockMat =
