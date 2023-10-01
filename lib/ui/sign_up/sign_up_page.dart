@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../router/router_path.dart';
-import '../base/base.dart';
 import 'sign_up_view_model.dart';
 
 class SignUpPage extends HookConsumerWidget {
@@ -12,7 +11,7 @@ class SignUpPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return BasePage(body: _buildBody());
+    return Scaffold(body: _buildBody());
   }
 
   Widget _buildBody() {
@@ -22,79 +21,184 @@ class SignUpPage extends HookConsumerWidget {
     final isDisplay = useState(true);
     return HookConsumer(
       builder: (context, ref, __) {
-        return Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 100, 8, 8),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('ユーザー名'),
-                ),
-                controller: userNameController,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('メールアドレス'),
-                ),
-                controller: emailController,
-                obscureText: true,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  suffixIcon: isDisplay.value == true
-                      ? IconButton(
-                          icon: const Icon(Icons.visibility),
-                          onPressed: () {
-                            isDisplay.value = !isDisplay.value;
-                          },
-                        )
-                      : IconButton(
-                          icon: const Icon(Icons.visibility_off),
-                          onPressed: () {
-                            isDisplay.value = !isDisplay.value;
-                          },
+        return LayoutBuilder(builder: (context, constraints) {
+          if (constraints.maxWidth < 600) {
+            return SizedBox(
+              width: constraints.maxWidth,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 100, 8, 8),
+                    child: SizedBox(
+                      width: constraints.maxWidth * 0.8,
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          label: Text('ユーザー名'),
                         ),
-                  border: const OutlineInputBorder(),
-                  label: const Text('パスワード'),
+                        controller: userNameController,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: constraints.maxWidth * 0.8,
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          label: Text('メールアドレス'),
+                        ),
+                        controller: emailController,
+                        obscureText: true,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: constraints.maxWidth * 0.8,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          suffixIcon: isDisplay.value == true
+                              ? IconButton(
+                                  icon: const Icon(Icons.visibility),
+                                  onPressed: () {
+                                    isDisplay.value = !isDisplay.value;
+                                  },
+                                )
+                              : IconButton(
+                                  icon: const Icon(Icons.visibility_off),
+                                  onPressed: () {
+                                    isDisplay.value = !isDisplay.value;
+                                  },
+                                ),
+                          border: const OutlineInputBorder(),
+                          label: const Text('パスワード'),
+                        ),
+                        controller: passwordController,
+                        obscureText: isDisplay.value,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        await ref.read(signUpViewModelProvider.notifier).signUp(
+                              email: emailController.text,
+                              password: passwordController.text,
+                              userName: userNameController.text,
+                            );
+                        if (!context.mounted) {
+                          return;
+                        }
+                        context.go(homePath);
+                      },
+                      child: const Text('アカウント作成'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      onPressed: () => context.go(signInPath),
+                      child: const Text('サインイン'),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+          return SizedBox(
+            width: constraints.maxWidth,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 100, 8, 8),
+                  child: SizedBox(
+                    width: 500,
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        label: Text('ユーザー名'),
+                      ),
+                      controller: userNameController,
+                    ),
+                  ),
                 ),
-                controller: passwordController,
-                obscureText: isDisplay.value,
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 500,
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        label: Text('メールアドレス'),
+                      ),
+                      controller: emailController,
+                      obscureText: true,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 500,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        suffixIcon: isDisplay.value == true
+                            ? IconButton(
+                                icon: const Icon(Icons.visibility),
+                                onPressed: () {
+                                  isDisplay.value = !isDisplay.value;
+                                },
+                              )
+                            : IconButton(
+                                icon: const Icon(Icons.visibility_off),
+                                onPressed: () {
+                                  isDisplay.value = !isDisplay.value;
+                                },
+                              ),
+                        border: const OutlineInputBorder(),
+                        label: const Text('パスワード'),
+                      ),
+                      controller: passwordController,
+                      obscureText: isDisplay.value,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      await ref.read(signUpViewModelProvider.notifier).signUp(
+                            email: emailController.text,
+                            password: passwordController.text,
+                            userName: userNameController.text,
+                          );
+                      if (!context.mounted) {
+                        return;
+                      }
+                      context.go(homePath);
+                    },
+                    child: const Text('アカウント作成'),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextButton(
+                    onPressed: () => context.go(signInPath),
+                    child: const Text('サインイン'),
+                  ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () async {
-                  await ref.read(signUpViewModelProvider.notifier).signUp(
-                        email: emailController.text,
-                        password: passwordController.text,
-                        userName: userNameController.text,
-                      );
-                  if (!context.mounted) {
-                    return;
-                  }
-                  context.go(homePath);
-                },
-                child: const Text('アカウント作成'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextButton(
-                onPressed: () => context.go(signInPath),
-                child: const Text('サインイン'),
-              ),
-            ),
-          ],
-        );
+          );
+        });
       },
     );
   }
