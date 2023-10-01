@@ -35,20 +35,18 @@ class GamePage extends HookConsumerWidget {
     return Stack(
       children: [
         const GameBackground(),
-        Expanded(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 40,
-              ),
-              _buildQuestion(),
-              Expanded(child: _buildMainBox()),
-              _buildButtons(),
-              const SizedBox(
-                height: 40,
-              ),
-            ],
-          ),
+        Column(
+          children: [
+            const SizedBox(
+              height: 40,
+            ),
+            _buildQuestion(),
+            Expanded(child: _buildMainBox()),
+            _buildButtons(),
+            const SizedBox(
+              height: 40,
+            ),
+          ],
         ),
       ],
     );
@@ -105,7 +103,7 @@ class GamePage extends HookConsumerWidget {
   Widget _buildMainBox() {
     return HookConsumer(builder: (context, ref, child) {
       final width = MediaQuery.of(context).size.width * 0.8;
-      return Container(
+      return SizedBox(
           width: width,
           child: Row(
             children: [

@@ -250,10 +250,10 @@ class GameViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void goDown() {
+  bool goDown() {
     if (!checkNext()) {
       _setCurrentMino();
-      return;
+      return false;
     }
 
     final tempPosition = _currentPosition! + const Position(x: 1, y: 0);
@@ -263,13 +263,14 @@ class GameViewModel extends BaseViewModel {
     if (!checkMove(tempPosition)) {
       updateMat(mat);
       _setCurrentMino();
-      return;
+      return false;
     }
 
     _currentPosition = tempPosition;
 
     updateMat(mat);
     notifyListeners();
+    return true;
   }
 
   void setMinoDirection() {
@@ -300,6 +301,7 @@ class GameViewModel extends BaseViewModel {
         kHNum - 1;
   }
 
+  //削除する関数
   int clear() {
     int result = 0;
     bool check = false;
@@ -321,5 +323,15 @@ class GameViewModel extends BaseViewModel {
       }
     }
     return result;
+  }
+
+  //自由落下する関数
+  void fallWhenFailed() {
+    _currentPosition = Position(
+      x: 0,
+      y: Random().nextInt(
+          kWNum - _currentMino!.getMinoSizeX(_currentMinoDirection!) - 1),
+    );
+    while (goDown()) {}
   }
 }
