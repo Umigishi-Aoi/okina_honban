@@ -29,13 +29,17 @@ class GameViewModel extends BaseViewModel {
 
   List<List<Block>> get mergedBlockMat => _mergedBlockMat!;
 
+  List<List<Block>>? _beforeBlockMat;
+
+  List<List<Block>> get beforeBlockMat => _beforeBlockMat!;
+
   List<List<Block>> initMat() {
     if (_currentPlacement == null) {
-      return _placedBlockMat;
+      return placedBlockMat;
     }
 
-    final mat = _placedBlockMat;
-
+    final mat =
+        List.generate(kHNum, (i) => List.generate(kWNum, (j) => const Block()));
     for (int i = 0;
         i < _currentMino!.getMinoSizeX(_currentMinoDirection!);
         i++) {
@@ -57,7 +61,7 @@ class GameViewModel extends BaseViewModel {
 
   TetroMino? _currentMino;
 
-  Position? _currentMinoLeftTop = const Position(x: 0, y: 0);
+  final Position _currentMinoLeftTop = const Position(x: 0, y: 0);
 
   Position? _currentPosition;
 
@@ -74,7 +78,7 @@ class GameViewModel extends BaseViewModel {
 
     for (int i = 0; i < calculatePositionMat.length; i++) {
       for (int j = 0; j < calculatePositionMat[i].length; j++) {
-        calculatePositionMat[i][j] += _currentMinoLeftTop!;
+        calculatePositionMat[i][j] += _currentMinoLeftTop;
       }
     }
     return null;
@@ -83,13 +87,14 @@ class GameViewModel extends BaseViewModel {
   MinoDirection? _currentMinoDirection = MinoDirection.N;
 
   List<List<int>>? get _currentPlacement {
-    if (_currentMino == null || _currentMinoLeftTop == null) {
+    if (_currentMino == null) {
       return null;
     }
     return _currentMino!.calculatePlacement(_currentMinoDirection!);
   }
 
   void _init() {
+    _beforeBlockMat = initMat();
     _currentMino = createMino();
     _nextMino = createMino();
     _currentPosition = const Position(x: 0, y: kStartPositionY);
@@ -100,8 +105,10 @@ class GameViewModel extends BaseViewModel {
   void _setCurrentMino() {
     _currentMino = _nextMino;
     _nextMino = createMino();
-    _currentMinoLeftTop = Position(x: Random().nextInt(kWNum - 1), y: 0);
+    _currentPosition = const Position(x: 0, y: kStartPositionY);
     _currentMinoDirection = MinoDirection.N;
+    clear();
+    _beforeBlockMat = mergedBlockMat;
     notifyListeners();
   }
 
@@ -123,7 +130,7 @@ class GameViewModel extends BaseViewModel {
   }
 
   List<List<Block>> resetMat() {
-    List<List<Block>> mat = _placedBlockMat;
+    List<List<Block>> mat = beforeBlockMat;
 
     for (int i = 0;
         i < _currentMino!.getMinoSizeX(_currentMinoDirection!);
@@ -142,14 +149,55 @@ class GameViewModel extends BaseViewModel {
     return mat;
   }
 
+  bool checkMove(Position position) {
+    List<List<Block>> mat = beforeBlockMat;
+    for (int i = 0;
+        i < _currentMino!.getMinoSizeX(_currentMinoDirection!);
+        i++) {
+      for (int j = 0;
+          j < _currentMino!.getMinoSizeY(_currentMinoDirection!);
+          j++) {
+        final x = i + position.x;
+        final y = j + position.y;
+        if (_currentPlacement![i][j] == 1 && mat[x][y].color != Colors.black) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  bool checkRotate(MinoDirection direction) {
+    List<List<Block>> mat = beforeBlockMat;
+
+    for (int i = 0; i < _currentMino!.getMinoSizeX(direction); i++) {
+      for (int j = 0; j < _currentMino!.getMinoSizeY(direction); j++) {
+        final x = i + _currentPosition!.x;
+        final y = j + _currentPosition!.y;
+        if (_currentPlacement![i][j] == 1 && mat[x][y].color != Colors.black) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
   void goLeft() {
     if (_currentPosition!.y - 1 < 0) {
       return;
     }
 
+    final tempPosition = _currentPosition! + const Position(x: 0, y: -1);
+
     List<List<Block>> mat = resetMat();
 
-    _currentPosition = _currentPosition! + const Position(x: 0, y: -1);
+    if (!checkMove(tempPosition)) {
+      return;
+    }
+
+    _currentPosition = tempPosition;
 
     updateMat(mat);
 
@@ -164,9 +212,15 @@ class GameViewModel extends BaseViewModel {
       return;
     }
 
+    final tempPosition = _currentPosition! + const Position(x: 0, y: 1);
+
     List<List<Block>> mat = resetMat();
 
-    _currentPosition = _currentPosition! + const Position(x: 0, y: 1);
+    if (!checkMove(tempPosition)) {
+      return;
+    }
+
+    _currentPosition = tempPosition;
 
     updateMat(mat);
 
@@ -174,16 +228,22 @@ class GameViewModel extends BaseViewModel {
   }
 
   void goDown() {
-    if (_currentPosition!.x +
-            (_currentMino!.getMinoSizeX(_currentMinoDirection!) - 1) +
-            1 >
-        kHNum - 1) {
+    if (!checkNext()) {
+      _setCurrentMino();
       return;
     }
 
+    final tempPosition = _currentPosition! + const Position(x: 1, y: 0);
+
     List<List<Block>> mat = resetMat();
 
-    _currentPosition = _currentPosition! + const Position(x: 1, y: 0);
+    if (!checkMove(tempPosition)) {
+      updateMat(mat);
+      _setCurrentMino();
+      return;
+    }
+
+    _currentPosition = tempPosition;
 
     updateMat(mat);
     notifyListeners();
@@ -202,10 +262,41 @@ class GameViewModel extends BaseViewModel {
 
     List<List<Block>> mat = resetMat();
 
+    if (checkRotate(temp)) {}
+
     _currentMinoDirection = temp;
 
     updateMat(mat);
 
     notifyListeners();
+  }
+
+  bool checkNext() {
+    return _currentPosition!.x +
+            (_currentMino!.getMinoSizeX(_currentMinoDirection!) - 1) <
+        kHNum - 1;
+  }
+
+  int clear() {
+    int result = 0;
+    bool check = false;
+    for (int i = 0; i < mergedBlockMat.length; i++) {
+      for (int j = 0; j < mergedBlockMat[i].length; j++) {
+        check = mergedBlockMat[i][j].color != Colors.black;
+        if (!check) {
+          break;
+        }
+      }
+      if (check) {
+        result++;
+        _mergedBlockMat!.removeAt(i);
+        _mergedBlockMat = [
+          List.generate(kWNum, (index) => const Block()),
+          ...mergedBlockMat
+        ];
+        check = false;
+      }
+    }
+    return result;
   }
 }

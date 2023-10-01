@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Block {
-  Color? get color => throw _privateConstructorUsedError;
+  Color get color => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BlockCopyWith<Block> get copyWith => throw _privateConstructorUsedError;
@@ -27,7 +27,7 @@ abstract class $BlockCopyWith<$Res> {
   factory $BlockCopyWith(Block value, $Res Function(Block) then) =
       _$BlockCopyWithImpl<$Res, Block>;
   @useResult
-  $Res call({Color? color});
+  $Res call({Color color});
 }
 
 /// @nodoc
@@ -43,13 +43,13 @@ class _$BlockCopyWithImpl<$Res, $Val extends Block>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? color = freezed,
+    Object? color = null,
   }) {
     return _then(_value.copyWith(
-      color: freezed == color
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
+              as Color,
     ) as $Val);
   }
 }
@@ -61,7 +61,7 @@ abstract class _$$BlockImplCopyWith<$Res> implements $BlockCopyWith<$Res> {
       __$$BlockImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Color? color});
+  $Res call({Color color});
 }
 
 /// @nodoc
@@ -75,13 +75,13 @@ class __$$BlockImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? color = freezed,
+    Object? color = null,
   }) {
     return _then(_$BlockImpl(
-      color: freezed == color
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
+              as Color,
     ));
   }
 }
@@ -89,10 +89,11 @@ class __$$BlockImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BlockImpl extends _Block {
-  const _$BlockImpl({this.color}) : super._();
+  const _$BlockImpl({this.color = Colors.black}) : super._();
 
   @override
-  final Color? color;
+  @JsonKey()
+  final Color color;
 
   @override
   String toString() {
@@ -118,11 +119,11 @@ class _$BlockImpl extends _Block {
 }
 
 abstract class _Block extends Block {
-  const factory _Block({final Color? color}) = _$BlockImpl;
+  const factory _Block({final Color color}) = _$BlockImpl;
   const _Block._() : super._();
 
   @override
-  Color? get color;
+  Color get color;
   @override
   @JsonKey(ignore: true)
   _$$BlockImplCopyWith<_$BlockImpl> get copyWith =>

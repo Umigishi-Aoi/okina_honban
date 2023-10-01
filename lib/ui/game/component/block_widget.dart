@@ -12,7 +12,7 @@ class BlockWidget extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return block.color == null
         ? _buildNoColorBox()
-        : _buildColoredBox(block.color!);
+        : _buildColoredBox(block.color);
   }
 
   Widget _buildNoColorBox() {

@@ -1,5 +1,5 @@
 const kWNum = 10;
-const kHNum = 15;
+const kHNum = 10;
 const kStartPositionY = 3;
 
 const toeicWords = {
