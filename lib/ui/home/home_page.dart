@@ -43,7 +43,7 @@ class HomePage extends HookConsumerWidget {
   Widget _buildText() {
     return Center(
       child: Text(
-        'TETOEIC',
+        'TeTOEIC',
         style: GoogleFonts.dotGothic16(
           textStyle: const TextStyle(fontSize: 60, fontWeight: FontWeight.w700),
         ),
