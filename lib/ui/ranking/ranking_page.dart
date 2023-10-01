@@ -13,9 +13,7 @@ class RankingPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return BasePage(
-      
-      body: _buildBody());
+    return Scaffold(body: _buildBody());
   }
 
   Widget _buildBody() {
