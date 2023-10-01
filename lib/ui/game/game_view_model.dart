@@ -126,6 +126,9 @@ class GameViewModel extends BaseViewModel {
   }
 
   void _setCurrentMino() {
+    if (isGameOver) {
+      return;
+    }
     _currentMino = _nextMino;
     _nextMino = createMino();
     _currentPosition = const Position(x: 0, y: kStartPositionY);
@@ -333,5 +336,18 @@ class GameViewModel extends BaseViewModel {
           kWNum - _currentMino!.getMinoSizeX(_currentMinoDirection!) - 1),
     );
     while (goDown()) {}
+  }
+
+  //ゲームオーバー判定ロジック
+  bool get isGameOver {
+    bool check = false;
+    for (int j = 0; j < mergedBlockMat[0].length; j++) {
+      check = mergedBlockMat[0][j].color != Colors.black;
+      if (check) {
+        notifyListeners();
+        return check;
+      }
+    }
+    return false;
   }
 }
