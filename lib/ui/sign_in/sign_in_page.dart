@@ -18,6 +18,7 @@ class SignInPage extends HookConsumerWidget {
   Widget _buildBody() {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
+    final isDisplay = useState(true);
     return HookConsumer(
       builder: (context, ref, __) {
         return Column(
@@ -35,11 +36,25 @@ class SignInPage extends HookConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('パスワード'),
+                decoration: InputDecoration(
+                  suffixIcon: isDisplay.value == true
+                      ? IconButton(
+                          icon: const Icon(Icons.visibility),
+                          onPressed: () {
+                            isDisplay.value = !isDisplay.value;
+                          },
+                        )
+                      : IconButton(
+                          icon: const Icon(Icons.visibility_off),
+                          onPressed: () {
+                            isDisplay.value = !isDisplay.value;
+                          },
+                        ),
+                  border: const OutlineInputBorder(),
+                  label: const Text('パスワード'),
                 ),
                 controller: passwordController,
+                obscureText: isDisplay.value,
               ),
             ),
             TextButton(onPressed: () {}, child: const Text('パスワードをお忘れですか？')),
