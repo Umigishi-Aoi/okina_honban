@@ -7,6 +7,7 @@ import 'package:okina_honban/ui/ranking/ranking_view_model.dart';
 
 import '../../data/model/tetoeic_user/tetoeic_user.dart';
 import '../../router/router_path.dart';
+import '../page_background/page_background.dart';
 
 class RankingPage extends HookConsumerWidget {
   const RankingPage({super.key});
@@ -22,14 +23,19 @@ class RankingPage extends HookConsumerWidget {
         final isLoading = ref.watch(loadingStateProvider.notifier).state;
         final users =
             ref.watch(rankingViewModelProvider.select((value) => value.users));
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        return Stack(
           children: [
-            if (!isLoading && users != null) ...[
-              _buildText(),
-              _buildRankingList(users),
-              _buildBackButton(),
-            ]
+            const PageBackground(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (!isLoading && users != null) ...[
+                  _buildText(),
+                  _buildRankingList(users),
+                  _buildBackButton(),
+                ]
+              ],
+            ),
           ],
         );
       },
@@ -41,7 +47,7 @@ class RankingPage extends HookConsumerWidget {
       child: Text(
         'スコアランキング',
         style: GoogleFonts.dotGothic16(
-          textStyle: const TextStyle(fontSize: 40),
+          textStyle: const TextStyle(fontSize: 40, color: Colors.white),
         ),
       ),
     );
@@ -71,6 +77,7 @@ class RankingPage extends HookConsumerWidget {
           margin: const EdgeInsets.all(16),
           padding: const EdgeInsets.only(top: 10, bottom: 10),
           decoration: BoxDecoration(
+            color: Colors.white,
             border: Border.all(color: Colors.black),
             borderRadius: BorderRadius.circular(16),
           ),
