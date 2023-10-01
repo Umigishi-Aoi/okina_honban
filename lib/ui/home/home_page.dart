@@ -6,8 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:okina_honban/foundation/audio_player_helper.dart';
 
 import '../../router/router_path.dart';
-import '../base/base.dart';
-import 'home_view_model.dart';
+import '../page_background/page_background.dart';
 
 class HomePage extends StatefulHookConsumerWidget {
   const HomePage({super.key});
@@ -31,29 +30,23 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BasePage(
-      appBar: BaseAppBar(
-        showBackButton: false,
-        actions: [
-          IconButton(
-            onPressed: () async {
-              await ref.watch(homeViewModelProvider).signOut();
-            },
-            icon: const Icon(Icons.logout),
-          ),
-        ],
-      ),
+    return Scaffold(
       body: _buildBody(),
     );
   }
 
   Widget _buildBody() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return Stack(
       children: [
-        _buildText(),
-        _buildGoToGamePageButton(),
-        _buildRankingButton(),
+        const PageBackground(),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _buildText(),
+            _buildGoToGamePageButton(),
+            _buildRankingButton(),
+          ],
+        ),
       ],
     );
   }
@@ -63,7 +56,8 @@ class _HomePageState extends ConsumerState<HomePage> {
       child: Text(
         'TeTOEIC',
         style: GoogleFonts.dotGothic16(
-          textStyle: const TextStyle(fontSize: 60, fontWeight: FontWeight.w700),
+          textStyle: const TextStyle(
+              fontSize: 60, fontWeight: FontWeight.w700, color: Colors.white),
         ),
       )
           .animate(onPlay: (controller) => controller.repeat())
