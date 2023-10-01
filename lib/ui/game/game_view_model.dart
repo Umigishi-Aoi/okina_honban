@@ -8,10 +8,15 @@ import 'package:okina_honban/ui/game/model/block.dart';
 import 'package:okina_honban/ui/game/model/enum/mino_type.dart';
 import 'package:okina_honban/ui/game/model/position.dart';
 
+import '../../foundation/audio_player_helper.dart';
 import 'model/enum/mino_direction.dart';
 
-final gameViewModelProvider =
-    ChangeNotifierProvider.autoDispose((ref) => GameViewModel(ref));
+final gameViewModelProvider = ChangeNotifierProvider.autoDispose((ref) {
+  ref.onDispose(() {
+    AudioPlayerHelper().pause();
+  });
+  return GameViewModel(ref);
+});
 
 class GameViewModel extends BaseViewModel {
   GameViewModel(super.ref) {

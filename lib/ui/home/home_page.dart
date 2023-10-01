@@ -3,16 +3,34 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:okina_honban/foundation/audio_player_helper.dart';
 
 import '../../router/router_path.dart';
 import '../base/base.dart';
 import 'home_view_model.dart';
 
-class HomePage extends HookConsumerWidget {
+class HomePage extends StatefulHookConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
+}
+
+class _HomePageState extends ConsumerState<HomePage> {
+  @override
+  void initState() {
+    AudioPlayerHelper().play(Bgm.opening.name);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    AudioPlayerHelper().pause();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return BasePage(
       appBar: BaseAppBar(
         actions: [

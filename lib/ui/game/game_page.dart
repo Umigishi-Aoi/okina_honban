@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:okina_honban/foundation/audio_player_helper.dart';
 import 'package:okina_honban/ui/game/component/block_widget.dart';
 import 'package:okina_honban/ui/game/component/preview_mino.dart';
 import 'package:okina_honban/ui/game/game_background.dart';
@@ -12,19 +14,32 @@ class GamePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(body: _buildBody());
+    useEffect(() {
+      AudioPlayerHelper().play(Bgm.palying.name);
+      return null;
+    }, null);
+
+    return WillPopScope(
+      onWillPop: () async {
+        AudioPlayerHelper().pause();
+        return true;
+      },
+      child: Scaffold(
+        body: _buildBody(),
+      ),
+    );
   }
 
   Widget _buildBody() {
     return Stack(
       children: [
-        const GameBackground(),
+        GameBackground(),
         Column(
           children: [
             _buildMainBox(),
             _buildButtons(),
           ],
-        )
+        ),
       ],
     );
   }
