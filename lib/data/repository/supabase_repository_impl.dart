@@ -1,5 +1,8 @@
+import 'package:okina_honban/data/model/tetoeic_user/tetoeic_user.dart';
 import 'package:okina_honban/data/repository/supabase_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../supabase_constants.dart';
 
 class SupabaseRepositoryImpl extends SupabaseRepository {
   SupabaseRepositoryImpl() {
@@ -41,5 +44,19 @@ class SupabaseRepositoryImpl extends SupabaseRepository {
       email: email,
       data: {'username': userName},
     );
+  }
+
+  @override
+  Future<void> setScore({required TetoeicUser user}) async {
+    await _supabaseClient.from(Tables.ranking.name).insert(user.toJson());
+  }
+
+  @override
+  Future<List<TetoeicUser>> getScores() async {
+    final scores = await _supabaseClient
+        .from(Tables.ranking.name)
+        .select<PostgrestList>('name, score')
+        .order('score', ascending: false);
+    return scores.map((e) => TetoeicUser.fromJson(e)).toList();
   }
 }

@@ -1,0 +1,4 @@
+enum Tables {
+  profiles,
+  ranking,
+}

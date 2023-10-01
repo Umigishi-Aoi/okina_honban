@@ -16,8 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Block {
-  Color? get color => throw _privateConstructorUsedError;
-  Position get position => throw _privateConstructorUsedError;
+  Color get color => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BlockCopyWith<Block> get copyWith => throw _privateConstructorUsedError;
@@ -28,9 +27,7 @@ abstract class $BlockCopyWith<$Res> {
   factory $BlockCopyWith(Block value, $Res Function(Block) then) =
       _$BlockCopyWithImpl<$Res, Block>;
   @useResult
-  $Res call({Color? color, Position position});
-
-  $PositionCopyWith<$Res> get position;
+  $Res call({Color color});
 }
 
 /// @nodoc
@@ -46,27 +43,14 @@ class _$BlockCopyWithImpl<$Res, $Val extends Block>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? color = freezed,
-    Object? position = null,
+    Object? color = null,
   }) {
     return _then(_value.copyWith(
-      color: freezed == color
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
-              as Position,
+              as Color,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PositionCopyWith<$Res> get position {
-    return $PositionCopyWith<$Res>(_value.position, (value) {
-      return _then(_value.copyWith(position: value) as $Val);
-    });
   }
 }
 
@@ -77,10 +61,7 @@ abstract class _$$BlockImplCopyWith<$Res> implements $BlockCopyWith<$Res> {
       __$$BlockImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Color? color, Position position});
-
-  @override
-  $PositionCopyWith<$Res> get position;
+  $Res call({Color color});
 }
 
 /// @nodoc
@@ -94,18 +75,13 @@ class __$$BlockImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? color = freezed,
-    Object? position = null,
+    Object? color = null,
   }) {
     return _then(_$BlockImpl(
-      color: freezed == color
+      color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
-              as Position,
+              as Color,
     ));
   }
 }
@@ -113,16 +89,15 @@ class __$$BlockImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BlockImpl extends _Block {
-  const _$BlockImpl({this.color, required this.position}) : super._();
+  const _$BlockImpl({this.color = Colors.black}) : super._();
 
   @override
-  final Color? color;
-  @override
-  final Position position;
+  @JsonKey()
+  final Color color;
 
   @override
   String toString() {
-    return 'Block(color: $color, position: $position)';
+    return 'Block(color: $color)';
   }
 
   @override
@@ -130,13 +105,11 @@ class _$BlockImpl extends _Block {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BlockImpl &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.position, position) ||
-                other.position == position));
+            (identical(other.color, color) || other.color == color));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, color, position);
+  int get hashCode => Object.hash(runtimeType, color);
 
   @JsonKey(ignore: true)
   @override
@@ -146,14 +119,11 @@ class _$BlockImpl extends _Block {
 }
 
 abstract class _Block extends Block {
-  const factory _Block({final Color? color, required final Position position}) =
-      _$BlockImpl;
+  const factory _Block({final Color color}) = _$BlockImpl;
   const _Block._() : super._();
 
   @override
-  Color? get color;
-  @override
-  Position get position;
+  Color get color;
   @override
   @JsonKey(ignore: true)
   _$$BlockImplCopyWith<_$BlockImpl> get copyWith =>

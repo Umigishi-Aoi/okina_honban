@@ -1,15 +1,12 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:okina_honban/ui/game/model/position.dart';
 
 part 'block.freezed.dart';
 
 @freezed
 class Block with _$Block {
   const factory Block({
-    Color? color,
-    required Position position,
+    @Default(Colors.black) Color color,
   }) = _Block;
 
   const Block._();

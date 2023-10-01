@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:okina_honban/ui/game/model/block.dart';
 
-class TBoxWidget extends HookConsumerWidget {
-  const TBoxWidget({super.key, required this.block, required this.length});
+class BlockWidget extends HookConsumerWidget {
+  const BlockWidget({super.key, required this.block, required this.length});
 
   final Block block;
   final double length;
@@ -12,7 +12,7 @@ class TBoxWidget extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return block.color == null
         ? _buildNoColorBox()
-        : _buildColoredBox(block.color!);
+        : _buildColoredBox(block.color);
   }
 
   Widget _buildNoColorBox() {

@@ -44,7 +44,7 @@ class BaseError<T> extends HookConsumerWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(failure!.data?.toString() ?? 'Unknown Error'),
+                      Text(failure!.error.toString()),
                       SizedBox(height: verticalPadding),
                       ElevatedButton(
                         onPressed: () =>
