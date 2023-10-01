@@ -38,13 +38,17 @@ class GamePage extends HookConsumerWidget {
         Column(
           children: [
             const SizedBox(
-              height: 40,
+              height: 60,
             ),
             _buildQuestion(),
-            Expanded(child: _buildMainBox()),
-            _buildButtons(),
             const SizedBox(
               height: 40,
+            ),
+            Expanded(child: _buildMainBox()),
+            Expanded(child: Center(child: _buildAnswerField())),
+            _buildButtons(),
+            const SizedBox(
+              height: 80,
             ),
           ],
         ),
@@ -73,6 +77,7 @@ class GamePage extends HookConsumerWidget {
       final textEditingController = useTextEditingController();
       return Container(
         height: 50,
+        width: double.infinity,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey, width: 1),
           color: Colors.black45.withOpacity(0.5),
@@ -80,6 +85,11 @@ class GamePage extends HookConsumerWidget {
         child: TextField(
           controller: textEditingController,
           textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
           onSubmitted: (value) {
             final isCorrect = ref.read(gameViewModelProvider).answer == value;
             checkAnswer(isCorrect, context);
@@ -103,9 +113,10 @@ class GamePage extends HookConsumerWidget {
   Widget _buildMainBox() {
     return HookConsumer(builder: (context, ref, child) {
       final width = MediaQuery.of(context).size.width * 0.8;
-      return SizedBox(
+      return Container(
           width: width,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildBlocks(),
               _buildNextMinoPreview(),
