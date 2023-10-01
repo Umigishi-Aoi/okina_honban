@@ -15,6 +15,7 @@ class HomePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return BasePage(
       appBar: BaseAppBar(
+        showBackButton: false,
         actions: [
           IconButton(
             onPressed: () async {
@@ -30,7 +31,7 @@ class HomePage extends HookConsumerWidget {
 
   Widget _buildBody() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         _buildText(),
         _buildGoToGamePageButton(),
@@ -92,7 +93,10 @@ class HomePage extends HookConsumerWidget {
           height: 50,
           child: ElevatedButton(
             onPressed: () => context.push(rankingPath),
-            child: Text('ランキング', style: GoogleFonts.dotGothic16()),
+            child: Text(
+              'ランキング',
+              style: GoogleFonts.dotGothic16(),
+            ),
           ),
         );
       },
