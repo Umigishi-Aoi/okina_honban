@@ -27,6 +27,7 @@ dependencies:
   url_launcher: ^6.1.14
   audioplayers: ^5.1.0
   flutter_shaders: ^0.1.2
+  flutter_native_splash: ^2.3.2
 
 dev_dependencies:
   flutter_test:
@@ -42,9 +43,22 @@ dependency_overrides:
 
 flutter:
   assets:
+    - assets/images/
     - assets/images/quiz/
     - assets/sounds/
   shaders:
     - shaders/game.glsl
 
   uses-material-design: true
+
+flutter_native_splash:
+  color: '#242537'
+  image: 'assets/images/splash.jpg'
+  color_dark: '#242537'
+  image_dark: 'assets/images/splash.jpg'
+  fullscreen: true
+  android_12:
+    icon_background_color: '#242537'
+    image: 'assets/images/splash.jpg'
+    icon_background_color_dark: '#242537'
+    image_dark: 'assets/images/splash.jpg'
