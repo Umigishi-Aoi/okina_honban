@@ -18,6 +18,8 @@ class BasePage extends HookConsumerWidget {
     this.error,
     this.needShowLoading = true,
     this.needShowError = true,
+    this.needAppBar = true,
+    this.backgroundWidget,
   }) : super(key: key);
 
   final Widget body;
@@ -29,19 +31,22 @@ class BasePage extends HookConsumerWidget {
   final Widget? error;
   final bool needShowLoading;
   final bool needShowError;
+  final bool needAppBar;
+  final Widget? backgroundWidget;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isLoading = ref.watch(loadingStateProvider);
     final failure = ref.watch(errorStateProvider);
     return Scaffold(
-      appBar: appBar ?? const BaseAppBar(),
+      appBar: needAppBar ? appBar ?? const BaseAppBar() : null,
       bottomNavigationBar: bottomNavigationBar,
       backgroundColor: backgroundColor,
       floatingActionButton: floatingActionButton,
       body: Stack(
         children: [
-          body,
+          if (backgroundWidget != null) backgroundWidget!,
+          if (!isLoading) body,
           loading ??
               BaseLoading(
                 isLoading && needShowLoading,

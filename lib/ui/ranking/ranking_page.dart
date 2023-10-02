@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,31 +15,29 @@ class RankingPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(body: _buildBody());
+    /* rankingViewModelProviderがなぜか何度も破棄されるようになった為useEffectで応急処置。
+     * autoDisposeを設定して、イニシャライザで呼ぶ方がスマートだとは思う。
+     */
+
+    useEffect(() {
+      ref.read(rankingViewModelProvider).setTetoeicUsersResult();
+      return null;
+    }, null);
+
+    return BasePage(
+        needAppBar: false,
+        backgroundWidget: const PageBackground(),
+        body: _buildBody());
   }
 
   Widget _buildBody() {
-    return HookConsumer(
-      builder: (context, ref, __) {
-        final isLoading = ref.watch(loadingStateProvider.notifier).state;
-        final users =
-            ref.watch(rankingViewModelProvider.select((value) => value.users));
-        return Stack(
-          children: [
-            const PageBackground(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (!isLoading && users != null) ...[
-                  _buildText(),
-                  _buildRankingList(users),
-                  _buildBackButton(),
-                ]
-              ],
-            ),
-          ],
-        );
-      },
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildText(),
+        _buildRankingList(),
+        _buildBackButton(),
+      ],
     );
   }
 
@@ -53,19 +52,25 @@ class RankingPage extends HookConsumerWidget {
     );
   }
 
-  Widget _buildRankingList(List<TetoeicUser> users) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth < 600) {
-          return _buildRankingBuilder(
-            users,
-            constraints.maxWidth * 0.8,
-          );
-        } else {
-          return _buildRankingBuilder(users, 500);
-        }
-      },
-    );
+  Widget _buildRankingList() {
+    return HookConsumer(builder: (context, ref, child) {
+      final users =
+          ref.watch(rankingViewModelProvider.select((value) => value.users));
+      return users != null
+          ? LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth < 600) {
+                  return _buildRankingBuilder(
+                    users,
+                    constraints.maxWidth * 0.8,
+                  );
+                } else {
+                  return _buildRankingBuilder(users, 500);
+                }
+              },
+            )
+          : const SizedBox();
+    });
   }
 
   Widget _buildRankingBuilder(List<TetoeicUser> users, double width) {
@@ -171,7 +176,9 @@ class RankingPage extends HookConsumerWidget {
           width: 80,
           height: 40,
           child: ElevatedButton(
-              onPressed: () => context.go(homePath),
+              onPressed: () {
+                context.go(homePath);
+              },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.black,
                 backgroundColor: Colors.grey[300],

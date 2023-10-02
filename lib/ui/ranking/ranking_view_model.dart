@@ -5,20 +5,20 @@ import 'package:okina_honban/data/repository/repository.dart';
 import '../base/base.dart';
 
 final rankingViewModelProvider =
-    ChangeNotifierProvider.autoDispose(RankingViewModel.new);
+    ChangeNotifierProvider((ref) => RankingViewModel(ref));
 
 class RankingViewModel extends BaseViewModel {
-  RankingViewModel(super.ref) {
-    init();
-    notifyListeners();
-  }
-  List<TetoeicUser>? users;
+  RankingViewModel(super.ref);
 
-  Future<void> init() async {
-    final usersResult = await callFuture<List<TetoeicUser>>(
+  Result<List<TetoeicUser>>? _usersResult;
+
+  Result<List<TetoeicUser>>? get usersResult => _usersResult;
+
+  List<TetoeicUser>? get users => _usersResult?.data;
+
+  Future<void> setTetoeicUsersResult() async {
+    _usersResult = await callFuture<List<TetoeicUser>>(
         () async => ref.read(supabaseRepositoryProvider).getScores());
-
-    users = usersResult.data;
     notifyListeners();
   }
 }
