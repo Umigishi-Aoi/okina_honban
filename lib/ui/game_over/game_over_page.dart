@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:okina_honban/router/router_path.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../game/game_view_model.dart';
@@ -87,7 +88,7 @@ class GameOverPage extends HookConsumerWidget {
             ),
             child: ElevatedButton(
               onPressed: () {
-                context.pop();
+                context.go(gamePath);
               },
               child: const Text('もう一回遊ぶ'),
             ),
@@ -99,7 +100,7 @@ class GameOverPage extends HookConsumerWidget {
             ),
             child: TextButton(
               onPressed: () {
-                // TODO: ホームに戻る遷移処理を書く
+                context.go(homePath);
               },
               child: const Text('ホームに戻る'),
             ),
@@ -122,7 +123,7 @@ class GameOverPage extends HookConsumerWidget {
             ),
             child: ElevatedButton(
               onPressed: () {
-                context.pop();
+                context.go(gamePath);
               },
               child: const Text('もう一回遊ぶ'),
             ),
@@ -134,7 +135,7 @@ class GameOverPage extends HookConsumerWidget {
             ),
             child: TextButton(
               onPressed: () {
-                // TODO: ホームに戻る遷移処理を書く
+                context.go(homePath);
               },
               child: const Text('ホームに戻る'),
             ),
